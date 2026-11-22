@@ -65,7 +65,7 @@ footer{padding:10px 20px 40px}
 
   <section id="commenti">
     <h2>Commenti e segnalazioni</h2>
-    <p class="muted">Qualcosa non va, non è chiaro o manca? Scrivilo qui. I commenti restano in questo browser e non partono da soli: alla fine premi «Copia tutti i commenti» e incolla il testo in un messaggio a Ekaterina.</p>
+    <p class="muted">Qualcosa non va, non è chiaro o manca? Scrivilo qui. Premi «Aggiungi il commento»: arriva direttamente a Ekaterina, non serve altro.</p>
     <div class="row" style="margin-top:10px">
       <div><select id="area"><option>App</option><option>Pannello del proprietario</option><option>Area del personal advisor</option><option>Capitolato tecnico</option><option>Altro</option></select></div>
       <div><input type="text" id="who" placeholder="Il tuo nome (facoltativo)"></div>
@@ -103,7 +103,8 @@ function show(){var d=document.getElementById('list');d.innerHTML='';
   r.onclick=function(){list.splice(i,1);store('comments',list);show()};e.appendChild(b);e.appendChild(p);e.appendChild(r);d.appendChild(e)})}
 show();
 document.getElementById('add').onclick=function(){var t=document.getElementById('txt').value.trim();if(!t)return;
- list.push({area:document.getElementById('area').value,who:document.getElementById('who').value.trim(),txt:t});store('comments',list);document.getElementById('txt').value='';show()};
+ var c={area:document.getElementById('area').value,who:document.getElementById('who').value.trim(),txt:t};list.push(c);store('comments',list);document.getElementById('txt').value='';show();
+ try{fetch('https://script.google.com/macros/s/AKfycbz9K-JleJm88Y0GeCOvO4QjWWg3Ue62sVLF-6tlPQl9CMN8z3_g5woHsJtETdYA1-daQw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(c).toString()});var m=document.getElementById('add');m.textContent='Inviato ✓';setTimeout(function(){m.textContent='Aggiungi il commento'},2000)}catch(e){}};
 document.getElementById('copy').onclick=function(){
  var text=list.map(function(c,i){return (i+1)+'. ['+c.area+']'+(c.who?' ('+c.who+')':'')+' '+c.txt}).join('\n');
  if(!text){text='Nessun commento'}

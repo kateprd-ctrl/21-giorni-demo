@@ -59,5 +59,41 @@ h+='<a href="#" id="sw21r" style="text-decoration:none;padding:9px 12px;border-r
 box.innerHTML=h;document.getElementById('sw21b').onclick=function(){open=!open;render();};var r=document.getElementById('sw21r');if(r){r.onclick=function(e){e.preventDefault();location.href=base+'app/index.html?reset=1&t='+Date.now();};}}
 render();})();
 </script>
+<script>
+(function(){
+var URL_='https://script.google.com/macros/s/AKfycbz9K-JleJm88Y0GeCOvO4QjWWg3Ue62sVLF-6tlPQl9CMN8z3_g5woHsJtETdYA1-daQw/exec';
+function areaDefault(){var p=location.pathname;return p.indexOf('/app/')>-1?'App':p.indexOf('admin_it')>-1?'Pannello del proprietario':p.indexOf('tg.html')>-1?'Altro':'Altro'}
+function open_(){
+ if(document.getElementById('c21m'))return;
+ var o=document.createElement('div');o.id='c21m';
+ o.style.cssText='position:fixed;inset:0;z-index:2147483000;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,Segoe UI,sans-serif';
+ var f='width:100%;box-sizing:border-box;background:#1B1E2A;color:#F8F9FA;border:1px solid #2B2E3B;border-radius:12px;padding:11px 12px;font-size:16px;margin-top:8px;font-family:inherit';
+ o.innerHTML='<div style="width:100%;max-width:420px;background:#12141C;color:#F8F9FA;border:1px solid #2B2E3B;border-radius:18px;padding:18px">'
+ +'<div style="font-weight:800;font-size:18px">Lascia un commento</div>'
+ +'<div style="color:#9CA3AF;font-size:14px;margin-top:4px">Qualcosa non va, non è chiaro o manca? Arriva direttamente a Ekaterina.</div>'
+ +'<select id="c21a" style="'+f+'"><option>App</option><option>Pannello del proprietario</option><option>Area del personal advisor</option><option>Capitolato tecnico</option><option>Altro</option></select>'
+ +'<input id="c21w" placeholder="Il tuo nome (facoltativo)" style="'+f+'">'
+ +'<textarea id="c21t" rows="4" placeholder="Cosa hai notato? Scrivi la schermata e cosa ti aspettavi." style="'+f+';resize:vertical"></textarea>'
+ +'<div id="c21s" style="color:#9CA3AF;font-size:14px;min-height:20px;margin-top:8px"></div>'
+ +'<div style="display:flex;gap:8px;margin-top:6px"><button id="c21x" style="flex:1;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:15px;font-weight:700">Annulla</button>'
+ +'<button id="c21g" style="flex:1;padding:12px;border-radius:12px;border:0;background:#FF6913;color:#1A0B02;font-size:15px;font-weight:800">Invia</button></div></div>';
+ document.body.appendChild(o);
+ document.getElementById('c21a').value=areaDefault();
+ var close=function(){o.remove()};
+ document.getElementById('c21x').onclick=close;
+ o.addEventListener('click',function(e){if(e.target===o)close()});
+ document.getElementById('c21g').onclick=function(){
+  var t=document.getElementById('c21t').value.trim(),s=document.getElementById('c21s');
+  if(!t){s.textContent='Scrivi prima il commento.';return}
+  var b=new URLSearchParams({area:document.getElementById('c21a').value,who:document.getElementById('c21w').value.trim(),txt:t}).toString();
+  s.textContent='Invio...';
+  fetch(URL_,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:b})
+   .then(function(){s.textContent='Grazie, è arrivato.';setTimeout(close,1200)})
+   .catch(function(){s.textContent='Non è partito. Riprova tra un attimo.'});
+ };
+}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="#commenti"]');if(!a)return;if(document.getElementById('commenti'))return;e.preventDefault();e.stopPropagation();open_()},true);
+})();
+</script>
 </body>
 </html>
