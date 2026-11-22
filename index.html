@@ -41,27 +41,81 @@ textarea{min-height:90px}
 .cm{border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:8px;background:#0F1117}
 .cm b{color:var(--gd)}
 footer{padding:10px 20px 40px}
+
+.hero{position:relative;overflow:hidden;padding:44px 20px 70px}
+.hero .o1,.hero .o2{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.hero .o1{width:280px;height:280px;background:#FF6913;opacity:.28;right:-60px;top:-80px;animation:ob1 9s ease-in-out infinite}
+.hero .o2{width:220px;height:220px;background:#C2410C;opacity:.22;left:-80px;bottom:-90px;animation:ob2 11s ease-in-out infinite}
+@keyframes ob1{50%{transform:translate(-30px,30px)}}@keyframes ob2{50%{transform:translate(30px,-20px)}}
+.hero .wrap{position:relative;animation:up .7s both}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid #5a3418;border-radius:99px;background:rgba(255,105,19,.1);color:#FFB27A;font-size:13px;font-weight:700;margin-bottom:14px}
+.pill b{width:8px;height:8px;border-radius:50%;background:#FF6913;animation:pl 1.8s infinite}@keyframes pl{50%{box-shadow:0 0 0 6px rgba(255,105,19,0)}0%{box-shadow:0 0 0 0 rgba(255,105,19,.6)}}
+.hero h1{font-size:54px;line-height:1;margin:0 0 10px;letter-spacing:-1px;background:none;color:var(--ink);-webkit-text-fill-color:initial}
+.hero h1 span{color:#FF6913}
+.hero .tag{font-size:19px;font-weight:700;color:#FFB27A;margin:0 0 10px}
+.hero .lead{color:var(--muted);max-width:560px;font-size:16px}
+.cards{margin-top:-40px;position:relative}
+a.card{text-decoration:none;color:inherit;animation:up .7s both;transition:transform .25s,border-color .25s,box-shadow .25s}
+a.card.c2{animation-delay:.1s}a.card.c3{animation-delay:.2s}
+a.card:hover{transform:translateY(-4px);border-color:#FF6913;box-shadow:0 10px 30px rgba(255,105,19,.18)}
+.card .ph{height:178px;border-radius:12px;overflow:hidden;background:#0B0D13;border:1px solid var(--line)}
+.card .ph img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.card .ph.mini{padding:10px;display:flex;flex-direction:column;gap:6px;justify-content:center}
+.mm{background:#12141C;border:1px solid var(--line);border-radius:10px;padding:5px 10px;font-size:12.5px;line-height:1.3;opacity:0;animation:mi .6s both}
+.mm em{display:block;font-style:normal;font-weight:800;font-size:10.5px;color:#FF9A4D;text-transform:uppercase;letter-spacing:.4px}
+.m1{animation-delay:.5s}.m2{animation-delay:.9s}.m3{animation-delay:1.3s}@keyframes mi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ct{display:flex;align-items:center;gap:10px}.num{flex:none;width:28px;height:28px;border-radius:9px;background:#FF6913;color:#1A0B02;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+.card .btn{margin-top:auto;display:block;min-height:46px;padding:12px 16px;border-radius:12px;font-weight:700;text-align:center;background:linear-gradient(120deg,#FF8A2B,#C2410C);color:#1A0B02}.card .btn.n{background:#1B1E2A;color:var(--ink);border:1px solid var(--line)}
+details.how{background:var(--card);border:1px solid var(--line);border-radius:18px;margin:14px 0;overflow:hidden}
+details.how summary{list-style:none;cursor:pointer;padding:18px 20px;font-weight:800;font-size:18px;display:flex;justify-content:space-between;align-items:center;min-height:56px}
+details.how summary::-webkit-details-marker{display:none}
+details.how summary:after{content:"+";color:#FF6913;font-size:26px;font-weight:400;transition:transform .2s}
+details.how[open] summary:after{transform:rotate(45deg)}
+.howin{padding:0 20px 20px}
 </style>
 </head>
 <body>
-<div class="hero"><div class="wrap">
-  <h1>«21 giorni»</h1>
-  <p>L’app per il programma di alimentazione e allenamento e il sito per i personal advisor. È una demo funzionante: puoi toccare tutto e verificare. Tutti i dati sono di prova.</p>
+<div class="hero"><i class="o1"></i><i class="o2"></i><div class="wrap">
+  <div class="pill"><b></b>Demo funzionante, dati di prova</div>
+  <h1><span>21</span> giorni</h1>
+  <p class="tag">Non è una dieta. È uno stile di vita.</p>
+  <p class="lead">Un percorso di alimentazione e allenamento che il cliente segue ogni giorno, e un sito che aiuta il personal advisor a farlo riordinare. Scegli da dove entrare: tocca tutto, è vero.</p>
 </div></div>
 <div class="wrap">
   <div class="cards">
-    <div class="card"><h2>1. App per il cliente</h2><p>Quella che sarà sul telefono: registrazione, diario, scanner del barattolo, menu con IA, allenamenti, 21 giorni, abbonamento. Nel browser la fotocamera è disattivata: al suo posto c’è un elenco «come se avessi scansionato».</p><a class="btn" href="app/index.html">Apri l’app</a></div>
-    <div class="card"><h2>2. Sito per il personal advisor</h2><p>La pagina che vede chi vuole offrire 21 giorni ai suoi clienti: presentazione, registrazione, codice promo e area personale per seguire i clienti, con le automazioni.</p><a class="btn" href="partner.html">Apri il sito partner</a></div>
-    <div class="card"><h2>Notifiche (Telegram, email, push)</h2><p>Come arrivano gli avvisi nel canale, per email e come push (registrazioni, scansioni, scadenze, sospetti, pagamenti, GDPR, errori) e cosa succede nell’app e nel sito.</p><a class="btn" href="tg.html">Apri gli scenari</a></div>
+    <a class="card c1" href="app/index.html">
+      <div class="ph"><img src="img/oggi.jpg" alt="Schermata Oggi dell’app" loading="lazy"></div>
+      <div class="ct"><span class="num">1</span><h2>App per il cliente</h2></div>
+      <p>Registrazione, diario, scanner del barattolo, menu con IA, allenamenti e percorso di 21 giorni.</p>
+      <span class="btn">Apri l’app</span>
+    </a>
+    <a class="card c2" href="partner.html">
+      <div class="ph mini"><div class="mm m1"><em>Nuova scansione</em>Marco T. ha scansionato</div><div class="mm m2"><em>Scadenza vicina</em>Giulia R. finisce tra 3 giorni</div><div class="mm m3"><em>Bozza pronta</em>Ciao Giulia! Vuoi riordinare?</div></div>
+      <div class="ct"><span class="num">2</span><h2>Sito per il personal advisor</h2></div>
+      <p>Presentazione, registrazione, codice promo e area personale per seguire i clienti, con le automazioni.</p>
+      <span class="btn">Apri il sito partner</span>
+    </a>
+    <a class="card c3" href="tg.html">
+      <div class="ph mini"><div class="mm m1"><em>Telegram</em>Nuova registrazione di un cliente</div><div class="mm m2"><em>Email</em>Il periodo gratuito finisce domani</div><div class="mm m3"><em>Push</em>Scansione in attesa di conferma</div></div>
+      <div class="ct"><span class="num">3</span><h2>Notifiche</h2></div>
+      <p>Come arrivano gli avvisi: Telegram, email e push, con tutti gli scenari.</p>
+      <span class="btn n">Apri gli scenari</span>
+    </a>
   </div>
 
-  <section>
-    <h2>Come provare l’app (5 minuti)</h2>
+  <details class="how">
+    <summary>Come provare tutto in 5 minuti</summary>
+    <div class="howin">
+
+    <h3>Come provare l’app</h3>
     <p class="muted">Spunta i passaggi man mano. Le spunte restano salvate in questo browser.</p>
     <ul class="ck" id="ck1"></ul>
     <h3>Come provare il pannello</h3>
     <ul class="ck" id="ck2"></ul>
-  </section>
+      </div>
+  </details>
+
 
   <section id="commenti">
     <h2>Commenti e segnalazioni</h2>
