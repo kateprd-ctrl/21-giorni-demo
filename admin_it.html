@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><script>(function(){var H="99c5ba7226c882ab3f8367a83347c4f7adb6fa57e22f986c66c89a6660a8f48f",K="g21ok";try{if(localStorage.getItem(K)===H)return}catch(e){}
+document.documentElement.style.visibility="hidden";
+function hex(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+window.addEventListener("DOMContentLoaded",function(){var o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0A0B0E;color:#F8F9FA;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,sans-serif;visibility:visible";
+o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#F2C94C;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
+document.body.appendChild(o);document.documentElement.style.visibility="visible";
+o.querySelector("form").onsubmit=function(ev){ev.preventDefault();var v=o.querySelector("input").value.trim();
+crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(hex(d)===H){try{localStorage.setItem(K,H)}catch(e){}o.remove()}else{o.querySelector("#e").textContent="Codice non corretto"}})}})})();</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pannello di gestione «21 giorni»</title>
+<style>
+:root{--bg:#0A0B0E;--card:#12141C;--ink:#F8F9FA;--muted:#9CA3AF;--line:#2B2E3B;--g:#D4AF37;--gd:#F2C94C;--gs:#2A2412;--am:#F08A3C;--ams:#33200F;--rd:#EF7070;--rds:#3A1D1F;--bl:#6AA8E6;--bls:#1B2638;--soft:#1B1E2A;--onbrand:#14110A;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{background:#0F1117;border-bottom:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+header h1{font-size:18px;margin:0;flex:1;min-width:180px}
+.seg{display:flex;background:#1B1E2A;border-radius:12px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:8px 12px;border-radius:10px;font:inherit;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button.on{background:#12141C;color:var(--gd);box-shadow:0 0 0 1px var(--g)}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;background:#0F1117;border-bottom:1px solid var(--line)}
+nav button{border:1px solid var(--line);background:#12141C;padding:8px 14px;border-radius:999px;font:inherit;font-weight:600;white-space:nowrap;cursor:pointer;color:var(--ink)}
+nav button.on{background:linear-gradient(120deg,#F5C84C,#A8751B);border-color:var(--g);color:var(--onbrand)}
+nav .badge{background:var(--rd);color:#14110A;border-radius:999px;font-size:11px;padding:1px 6px;margin-left:6px}
+main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.card h2{margin:0 0 8px;font-size:17px}
+.card h3{margin:14px 0 6px;font-size:15px}
+.muted{color:var(--muted);font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:#12141C;border:1px solid var(--line);border-radius:14px;padding:12px}
+.kpi b{display:block;font-size:26px;line-height:1.1}
+.kpi span{color:var(--muted);font-size:13px}
+.kpi.warn b{color:var(--am)}.kpi.bad b{color:var(--rd)}.kpi.good b{color:var(--gd)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:14px}
+th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.02em}
+tr.click{cursor:pointer}tr.click:hover{background:#1B1E2A}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700;background:#1B1E2A;color:var(--muted)}
+.pill.g{background:var(--gs);color:var(--gd)}.pill.a{background:var(--ams);color:var(--am)}.pill.r{background:var(--rds);color:var(--rd)}.pill.b{background:var(--bls);color:var(--bl)}
+button.b,a.b,label.b{border:0;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer;background:linear-gradient(120deg,#F5C84C,#A8751B);color:var(--onbrand);text-decoration:none;display:inline-block}
+button.b.s,label.b.s{background:var(--gs);color:var(--gd);background-image:none}button.b.d{background:var(--rds);color:var(--rd);background-image:none}button.b.n{background:#1B1E2A;color:var(--ink);background-image:none}
+button.b:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#0F1117;color:var(--ink)}
+textarea{width:100%;min-height:76px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.note{background:var(--bls);border-radius:12px;padding:10px 12px;font-size:14px}
+.note.w{background:var(--ams)}.note.ok{background:var(--gs)}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.bar i{display:block;height:10px;background:var(--g)}
+.chart{display:flex;align-items:flex-end;gap:4px;height:120px;padding-top:8px}
+.chart div{flex:1;background:var(--g);border-radius:4px 4px 0 0;min-height:2px;position:relative}
+.chart div span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:10px;color:var(--muted)}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--g);color:#14110A;padding:10px 16px;border-radius:12px;display:none;z-index:50;max-width:90vw}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:40}
+#modal .box{background:#12141C;border:1px solid var(--line);border-radius:18px;padding:20px;max-width:480px;width:100%;max-height:90vh;overflow:auto}
+.tag{font-size:11px;font-weight:700;border-radius:6px;padding:1px 6px;background:var(--bls);color:var(--bl);margin-left:6px;vertical-align:middle}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.chk:last-child{border:0}.chk .st{flex:none;width:96px}
+@media(max-width:600px){main{padding:10px}.card{padding:12px}}
+.fb{position:fixed;right:14px;bottom:14px;background:var(--g);color:#14110A;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:999px;z-index:30;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Pannello «21 giorni» <span class="pill">demo, dati di prova</span></h1>
+  <div class="seg" id="roleSeg">
+    <button data-role="owner" class="on">Proprietario della piattaforma</button>
+    <button data-role="dist">Area distributore</button>
+  </div>
+</header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<a class="fb" href="index.html#commenti">💬 Lascia un commento</a>
+<div id="toast"></div>
+<div id="modal"><div class="box" id="modalBox"></div></div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s){return document.querySelector(s)};
+var DAY=86400000, NOW=Date.now();
+var OWNER='Proprietario della piattaforma';
+function fmt(ts){var d=new Date(ts);return ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear()}
+function fmtT(ts){var d=new Date(ts);return fmt(ts)+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function toast(t){var e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(function(){e.style.display='none'},2600)}
+function modal(html){$('#modalBox').innerHTML=html;$('#modal').style.display='flex'}
+function closeModal(){$('#modal').style.display='none'}
+$('#modal').addEventListener('click',function(e){if(e.target.id==='modal')closeModal()});
+function giorni(n){return n+' '+(n===1?'giorno':'giorni')}
+
+/* ---------- dati ---------- */
+var NAMES=['Maria Ferrari','Luca Rinaldi','Anna Bianchi','Sergio Lucchesi','Elena Rossi','Paolo Novelli','Tiziana Berti','Marco Conti','Irene Lanza','Davide Valli','Giulia Ferri','Andrea Tamburini','Laura Moretti','Nicola Orlandi','Chiara Esposito'];
+var dists=NAMES.map(function(n,i){
+  var clients=[34,12,18,45,9,27,21,15,38,11,24,30,8,19,16][i];
+  return {id:i+1,name:n,code:'D-'+('4F7K9TQ2XB5NHM8'.charAt(i))+('A3C7E1G5J9L2N4P'.charAt(i))+(10+i*7),status:'active',
+    clients:clients,paying:Math.round(clients*[.12,.2,.1,.15,.22,.1,.18,.12,.09,.2,.14,.11,.25,.13,.1][i]),
+    pending:[3,1,4,2,0,5,2,1,3,0,2,1,0,2,1][i],ending:[6,2,3,7,1,4,3,2,5,1,3,4,1,3,2][i],
+    fee:[30,30,30,40,30,30,30,40,30,30,40,30,30,30,30][i],share:[15,15,15,20,15,15,15,20,15,15,20,15,15,15,15][i]};
+});
+var ME=3;
+function baseClients(){return [
+ ['Cliente 1001',2,'pending',true],['Cliente 1002',5,'pending',false],['Cliente 1003',-1,'confirmed',true],['Cliente 1004',12,'confirmed',true],
+ ['Cliente 1005',20,'confirmed',false],['Cliente 1006',7,'pending',true],['Cliente 1007',-4,'rejected',false],['Cliente 1008',28,'confirmed',true],
+ ['Cliente 1009',3,'pending',false],['Cliente 1010',16,'confirmed',true],['Cliente 1011',1,'pending',true],['Cliente 1012',9,'confirmed',false]
+].map(function(c,i){return {id:i+1,name:c[0],endIn:c[1],scan:c[2],consent:c[3],jar:i%3===1?30:21,paid:i%5===2}});}
+var clients=baseClients();
+var suspicious=[
+ {id:1,user:'Account 2031',reason:'Scansioni frequenti',detail:'5 scansioni in 2 giorni',st:'new'},
+ {id:2,user:'Account 2044',reason:'Stesso codice su più account',detail:'Coincide con gli account 2045 e 2078',st:'new'},
+ {id:3,user:'Account 2102',reason:'Nessun distributore, serve verifica manuale',detail:'Scansione e foto del numero di lotto, numero illeggibile',st:'new'},
+ {id:4,user:'Account 2150',reason:'Scansioni frequenti',detail:'3 scansioni in un giorno da telefoni diversi',st:'new'},
+ {id:5,user:'Account 2177',reason:'Nessun distributore, serve verifica manuale',detail:'Foto del lotto accettata, lotto non trovato nel catalogo',st:'new'}
+];
+var unassigned=[{id:1,user:'Account 3011',country:'Estonia',assign:''},{id:2,user:'Account 3018',country:'Italia',assign:''},{id:3,user:'Account 3025',country:'Lettonia',assign:''},{id:4,user:'Account 3040',country:'Estonia',assign:''}];
+var changes=[
+ {id:1,client:'Cliente 1004',from:2,to:5,reason:'Si è trasferito in un’altra città',date:NOW-2*DAY,st:'new'},
+ {id:2,client:'Cliente 1010',from:3,to:9,reason:'Vuole lavorare con un altro consulente',date:NOW-1*DAY,st:'new'},
+ {id:3,client:'Cliente 1033',from:8,to:3,reason:'Consigliato da conoscenti',date:NOW-5*3600000,st:'new'}
+];
+var changeHistory=[{client:'Cliente 0912',from:'Distributore 4',to:'Distributore 6',date:NOW-20*DAY,by:OWNER}];
+var catalog=[
+ ['Estonia','4600000002101','Frullato proteico, barattolo da 21 giorni','30 g',380,48,6,30],
+ ['Estonia','4600000003001','Miscela proteica, barattolo da 30 giorni','30 g',360,44,5,34],
+ ['Estonia','4600000004008','Tisana alle erbe, barattolo','2 g',2,0,0,0],
+ ['Lettonia','4700000002108','Frullato proteico, barattolo da 21 giorni','30 g',380,48,6,30],
+ ['Lettonia','4700000003005','Miscela proteica, barattolo da 30 giorni','30 g',362,44,5,34],
+ ['Italia','8000000002105','Frullato proteico, barattolo da 21 giorni','30 g',378,47,6,31],
+ ['Italia','8000000003002','Miscela proteica, barattolo da 30 giorni','30 g',360,44,5,34],
+ ['Italia','8000000004009','Barretta proteica','35 g',140,10,5,14],
+ ['Estonia','4600000005005','Fibre, barattolo da 21 giorni','10 g',20,0,0,6],
+ ['Estonia','4600000006002','Barretta proteica','35 g',150,12,5,15]
+];
+var accessLog=[];
+(function(){
+  var who=['Distributore 3','Distributore 3','Distributore 5',OWNER,'Distributore 3','Distributore 9','Distributore 2',OWNER];
+  var what=['Scadenze e stato della scansione','Scadenze e stato della scansione','Scadenze e stato della scansione','Assegnazione del distributore','Diario alimentare (con consenso del cliente)','Scadenze e stato della scansione','Conferma della scansione','Verifica di un account sospetto'];
+  for(var i=0;i<16;i++)accessLog.push({who:who[i%8],subj:'Cliente '+(1001+(i*7)%40),when:NOW-i*3.1*3600000,what:what[(i+i%3)%8]});
+})();
+var ai={days:[],limit:10};
+(function(){var v=[210,240,180,260,300,280,150,220,310,330,290,170,240,350];for(var i=0;i<14;i++)ai.days.push({d:NOW-(13-i)*DAY,n:v[i]})})();
+var metrics=[
+ ['Attivazione','Quota dei nuovi utenti che scansiona il primo barattolo entro 3 giorni','62%','+4 p.p.'],
+ ['Abitudine','Quota di giorni con una voce nel diario nei primi 21 giorni','71%','+2 p.p.'],
+ ['Seconda scansione','Quota di persone che scansiona il barattolo successivo prima della fine del periodo','54%','+6 p.p.'],
+ ['Passaggio a pagamento','Quota di chi ha saltato il periodo, ha pagato e non ha annullato entro 7 giorni','18%','0 p.p.'],
+ ['Annullamenti rapidi','Annullamenti nelle prime 48 ore dopo l’addebito','9%','-1 p.p.'],
+ ['Fidelizzazione al 30º giorno','Quota di utenti attivi al 30º giorno','48%','+3 p.p.'],
+ ['Fidelizzazione al 90º giorno','Quota di utenti attivi al 90º giorno','31%','+1 p.p.'],
+ ['Carico IA','Richieste all’IA per utente al giorno','1,8','-0,1'],
+ ['Reperibilità','Quota di scansioni trovate nel catalogo','91%','+2 p.p.']
+];
+var settings={rem1:7,rem2:3,rem3:1,confirmDays:5,aiLimit:10,kcalF:1200,kcalM:1500,earlyScan:7};
+var fin={price:10,store:15};
+var accounts=[
+ {id:'a1',label:'Account 1001',email:'a***@mail.example',status:'active'},{id:'a2',label:'Account 2031',email:'k***@mail.example',status:'active'},
+ {id:'a3',label:'Account 2044',email:'s***@mail.example',status:'active'},{id:'a4',label:'Account 2150',email:'v***@mail.example',status:'blocked'}
+];
+var gdpr=[
+ {id:1,user:'Account 1007',type:'Cancellazione dei dati',date:NOW-9*DAY,st:'new'},
+ {id:2,user:'Account 1022',type:'Esportazione dei dati',date:NOW-3*DAY,st:'new'},
+ {id:3,user:'Account 1031',type:'Cancellazione dei dati',date:NOW-1*DAY,st:'new'}
+];
+var tickets=[
+ {id:1,user:'Account 1015',topic:'Perché mi hanno addebitato dei soldi',date:NOW-1*DAY,st:'new'},
+ {id:2,user:'Account 1042',topic:'Prodotto non trovato durante la scansione',date:NOW-2*DAY,st:'new'},
+ {id:3,user:'Account 1050',topic:'Come annullare l’abbonamento',date:NOW-3*DAY,st:'new'}
+];
+var drafts=[];
+function makeDrafts(){
+  drafts=[];
+  clients.forEach(function(c){
+    if(c.endIn<=7){
+      var t=c.endIn<=0?'Il periodo è terminato. Se hai già il barattolo, scansionalo nell’app e l’accesso torna subito. Se te ne serve uno nuovo, scrivimi e ti aiuto con l’ordine.':
+        'Ciao! Il periodo gratuito nell’app finisce tra '+giorni(c.endIn)+'. Quando ordini un nuovo barattolo, scansionalo e il periodo si prolunga. Se ti serve aiuto con l’ordine, scrivimi.';
+      drafts.push({cid:c.id,name:c.name,text:t,on:true,sent:false});
+    }
+  });
+}
+makeDrafts();
+
+/* ---------- stato dell’interfaccia ---------- */
+var S={role:'owner',tab:'summary',ver:'new',flt:'',market:'all',csvPreview:null,ordersResult:null};
+var OWNER_TABS=[['summary','Riepilogo'],['dists','Distributori'],['review','Verifiche'],['catalog','Catalogo'],['settings','Impostazioni'],['log','Registro accessi'],['ai','Spesa IA'],['metrics','Metriche'],['finance','Finanza'],['support','Account e assistenza'],['cover','Checklist rispetto al capitolato']];
+var DIST_TABS=[['clients','Clienti'],['orders','Esportazione ordini'],['remind','Promemoria'],['link','Collegamento e codice'],['iso','Accesso e isolamento']];
+function pendingReview(){return suspicious.filter(function(s){return s.st==='new'}).length+unassigned.filter(function(u){return !u.assign}).length+changes.filter(function(c){return c.st==='new'}).length}
+function distName(id){var d=dists.filter(function(x){return x.id==id})[0];return d?d.name:OWNER}
+
+function setRole(r){S.role=r;S.tab=r==='owner'?'summary':'clients';render()}
+document.querySelectorAll('#roleSeg button').forEach(function(b){b.addEventListener('click',function(){setRole(b.getAttribute('data-role'))})});
+
+function renderNav(){
+  document.querySelectorAll('#roleSeg button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-role')===S.role)});
+  var tabs=S.role==='owner'?OWNER_TABS:DIST_TABS;
+  $('#nav').innerHTML=tabs.map(function(t){
+    var badge='';
+    if(t[0]==='review'&&pendingReview())badge='<span class="badge">'+pendingReview()+'</span>';
+    if(t[0]==='support'&&(gdpr.filter(function(g){return g.st==='new'}).length))badge='<span class="badge">'+gdpr.filter(function(g){return g.st==='new'}).length+'</span>';
+    if(t[0]==='remind'){var n=drafts.filter(function(d){return !d.sent}).length;if(n)badge='<span class="badge">'+n+'</span>'}
+    return '<button data-tab="'+t[0]+'" class="'+(S.tab===t[0]?'on':'')+'">'+t[1]+badge+'</button>'}).join('');
+  document.querySelectorAll('#nav button').forEach(function(b){b.addEventListener('click',function(){S.tab=b.getAttribute('data-tab');render()})});
+}
+
+/* ---------- schermate del proprietario ---------- */
+function vSummary(){
+  var tot=dists.filter(function(d){return d.status==='active'});
+  var sum=function(k){return tot.reduce(function(a,d){return a+d[k]},0)};
+  var h='<div class="kpis">'+
+   '<div class="kpi"><b>'+tot.length+'</b><span>distributori</span></div>'+
+   '<div class="kpi"><b>'+sum('clients')+'</b><span>clienti</span></div>'+
+   '<div class="kpi good"><b>'+sum('paying')+'</b><span>clienti paganti</span></div>'+
+   '<div class="kpi warn"><b>'+sum('pending')+'</b><span>scansioni in attesa di conferma</span></div>'+
+   '<div class="kpi warn"><b>'+sum('ending')+'</b><span>barattoli in esaurimento</span></div>'+
+   '<div class="kpi bad"><b>'+pendingReview()+'</b><span>in attesa di una decisione del proprietario</span></div></div>';
+  h+='<div class="card"><h2>Tutti i distributori</h2><p class="muted">Tocca una riga per aprire l’area del distributore. Ogni consultazione viene registrata nel registro accessi.</p><div class="tw"><table><thead><tr><th>Distributore</th><th>Clienti</th><th>Paganti</th><th>Scansioni in attesa</th><th>Barattoli in esaurimento</th><th>Stato</th></tr></thead><tbody>'+
+   dists.map(function(d){return '<tr class="click" data-open="'+d.id+'"><td><b>'+esc(d.name)+'</b></td><td>'+d.clients+'</td><td>'+d.paying+'</td><td>'+(d.pending?'<span class="pill a">'+d.pending+'</span>':'0')+'</td><td>'+(d.ending?'<span class="pill a">'+d.ending+'</span>':'0')+'</td><td>'+(d.status==='active'?'<span class="pill g">attivo</span>':'<span class="pill r">disattivato</span>')+'</td></tr>'}).join('')+
+   '</tbody></table></div></div>';
+  return h;
+}
+function vDists(){
+  var h='<div class="card"><h2>Distributori e condizioni</h2><p class="muted">Ognuno ha il suo codice di collegamento univoco e le sue condizioni. Quota per l’area e percentuale sui clienti paganti si impostano per ciascuno. Le cifre sono di prova.</p><div class="tw"><table><thead><tr><th>Distributore</th><th>Codice</th><th>Quota area, €/mese</th><th>Percentuale sui paganti, %</th><th>Stato</th><th></th></tr></thead><tbody>'+
+  dists.map(function(d){return '<tr><td><b>'+esc(d.name)+'</b></td><td><code>'+d.code+'</code></td>'+
+   '<td><input type="number" min="0" style="width:80px" data-fee="'+d.id+'" value="'+d.fee+'"></td>'+
+   '<td><input type="number" min="0" max="100" style="width:70px" data-share="'+d.id+'" value="'+d.share+'"></td>'+
+   '<td>'+(d.status==='active'?'<span class="pill g">attivo</span>':'<span class="pill r">disattivato</span>')+'</td>'+
+   '<td>'+(d.status==='active'?'<button class="b d" data-disable="'+d.id+'">Disattiva</button>':'<button class="b s" data-enable="'+d.id+'">Riattiva</button>')+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+  h+='<div class="card"><h2>Aggiungi un distributore</h2><div class="row"><label class="f">Nome<input id="nd_name" placeholder="Nome e cognome"></label><label class="f">Quota area, €/mese<input id="nd_fee" type="number" value="30" style="width:120px"></label><label class="f">Percentuale, %<input id="nd_share" type="number" value="15" style="width:90px"></label><button class="b" data-adddist="1" style="align-self:flex-end">Crea e assegna il codice</button></div></div>';
+  return h;
+}
+function vReview(){
+  var tabs=[['new','Account sospetti ('+suspicious.filter(function(s){return s.st==='new'}).length+')'],['un','Senza distributore ('+unassigned.filter(function(u){return !u.assign}).length+')'],['ch','Cambio di distributore ('+changes.filter(function(c){return c.st==='new'}).length+')']];
+  var h='<div class="card"><div class="row">'+tabs.map(function(t){return '<button class="b '+(S.ver===t[0]?'':'n')+'" data-ver="'+t[0]+'">'+t[1]+'</button>'}).join('')+'</div></div>';
+  if(S.ver==='new'){
+    h+='<div class="card"><h2>Account sospetti</h2><p class="muted">Qui finiscono le scansioni frequenti, lo stesso codice su più account e i clienti senza distributore da controllare a mano. Limite: una attivazione al giorno per account.</p><div class="tw"><table><thead><tr><th>Account</th><th>Motivo</th><th>Dettagli</th><th>Decisione</th></tr></thead><tbody>'+
+    suspicious.map(function(s){return '<tr><td><b>'+s.user+'</b></td><td>'+esc(s.reason)+'</td><td class="muted">'+esc(s.detail)+'</td><td>'+(s.st==='new'?'<div class="row"><button class="b" data-sus="ok:'+s.id+'">Scansione valida</button><button class="b n" data-sus="no:'+s.id+'">Rifiuta</button><button class="b d" data-sus="blk:'+s.id+'">Blocca</button></div>':'<span class="pill '+(s.st==='ok'?'g':'r')+'">'+({ok:'accettata',no:'rifiutata',blk:'bloccato'}[s.st])+'</span>')+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+  }
+  if(S.ver==='un'){
+    h+='<div class="card"><h2>Clienti senza distributore</h2><p class="muted">Sono arrivati senza codice. Assegna il distributore a mano. Finché non è assegnato, la scansione la verifica il proprietario.</p><div class="tw"><table><thead><tr><th>Account</th><th>Paese</th><th>Assegna</th></tr></thead><tbody>'+
+    unassigned.map(function(u){return '<tr><td><b>'+u.user+'</b></td><td>'+u.country+'</td><td>'+(u.assign?'<span class="pill g">'+esc(distName(u.assign))+'</span>':'<div class="row"><select id="as'+u.id+'">'+dists.filter(function(d){return d.status==='active'}).map(function(d){return '<option value="'+d.id+'">'+esc(d.name)+'</option>'}).join('')+'</select><button class="b" data-assign="'+u.id+'">Assegna</button></div>')+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+  }
+  if(S.ver==='ch'){
+    h+='<div class="card"><h2>Richieste di cambio distributore</h2><p class="muted">Il cliente è legato a un solo distributore. Il cambio è possibile su richiesta del cliente e solo con l’approvazione del proprietario. Lo storico viene conservato.</p><div class="tw"><table><thead><tr><th>Cliente</th><th>Da</th><th>A</th><th>Motivo</th><th>Decisione</th></tr></thead><tbody>'+
+    changes.map(function(c){return '<tr><td><b>'+c.client+'</b><div class="muted">'+fmt(c.date)+'</div></td><td>'+esc(distName(c.from))+'</td><td>'+esc(distName(c.to))+'</td><td class="muted">'+esc(c.reason)+'</td><td>'+(c.st==='new'?'<div class="row"><button class="b" data-chg="ok:'+c.id+'">Approva</button><button class="b n" data-chg="no:'+c.id+'">Rifiuta</button></div>':'<span class="pill '+(c.st==='ok'?'g':'r')+'">'+(c.st==='ok'?'approvato':'rifiutato')+'</span>')+'</td></tr>'}).join('')+'</tbody></table></div>'+
+    '<h3>Storico dei cambi</h3><div class="tw"><table><thead><tr><th>Cliente</th><th>Da</th><th>A</th><th>Quando</th><th>Chi ha deciso</th></tr></thead><tbody>'+
+    changeHistory.map(function(c){return '<tr><td>'+c.client+'</td><td>'+c.from+'</td><td>'+c.to+'</td><td>'+fmt(c.date)+'</td><td>'+c.by+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+  }
+  return h;
+}
+function vCatalog(){
+  var markets=['all','Estonia','Lettonia','Italia'];
+  var rows=catalog.filter(function(r){return (S.market==='all'||r[0]===S.market)&&(!S.flt||(r[2]+r[1]).toLowerCase().indexOf(S.flt.toLowerCase())>=0)});
+  var h='<div class="card"><h2>Catalogo prodotti</h2><p class="muted">Lo gestisce un dipendente incaricato. Codici a barre e composizioni cambiano da paese a paese, quindi il catalogo è diviso per mercato. I dati vanno verificati con la confezione e i diritti d’uso confermati prima del lancio. I codici a barre della demo sono di prova.</p>'+
+   '<div class="row"><select id="mk">'+markets.map(function(m){return '<option value="'+m+'"'+(S.market===m?' selected':'')+'>'+(m==='all'?'Tutti i mercati':m)+'</option>'}).join('')+'</select><input id="cf" placeholder="Cerca per nome o codice" value="'+esc(S.flt)+'" style="flex:1;min-width:180px"><label class="b s" style="cursor:pointer">Carica CSV<input id="csv" type="file" accept=".csv,text/csv" style="display:none"></label><button class="b n" data-csvsample="1">Esempio di CSV</button></div>'+
+   '<div class="kpis" style="margin:12px 0"><div class="kpi good"><b>91%</b><span>scansioni trovate nel catalogo</span></div><div class="kpi"><b>'+catalog.length+'</b><span>voci nel catalogo</span></div><div class="kpi warn"><b>14</b><span>codici non trovati questa settimana</span></div></div>'+
+   '<div class="tw"><table><thead><tr><th>Mercato</th><th>Codice a barre</th><th>Nome</th><th>Porzione</th><th>kcal</th><th>P</th><th>G</th><th>C</th></tr></thead><tbody>'+
+   rows.map(function(r){return '<tr><td>'+r[0]+'</td><td><code>'+r[1]+'</code></td><td>'+esc(r[2])+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td><td>'+r[5]+'</td><td>'+r[6]+'</td><td>'+r[7]+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+  if(S.csvPreview){
+    var p=S.csvPreview;
+    h+='<div class="card"><h2>Anteprima del caricamento</h2><p>Righe valide: <b>'+p.ok.length+'</b>, con errori: <b>'+p.bad.length+'</b>.</p>'+(p.bad.length?'<div class="note w">Errori: '+p.bad.map(function(b){return 'riga '+b.n+' ('+esc(b.why)+')'}).join(', ')+'</div>':'')+
+    '<div class="row" style="margin-top:10px"><button class="b" data-csvgo="1"'+(p.ok.length?'':' disabled')+'>Aggiungi al catalogo</button><button class="b n" data-csvno="1">Annulla</button></div></div>';
+  }
+  return h;
+}
+function vSettings(){
+  return '<div class="card"><h2>Impostazioni della piattaforma</h2><div class="grid2">'+
+  '<div><h3>Promemoria di fine periodo</h3><p class="muted">Quanti giorni prima della fine inviare il promemoria.</p><div class="row"><label class="f">1º<input type="number" id="s_r1" value="'+settings.rem1+'" style="width:70px"></label><label class="f">2º<input type="number" id="s_r2" value="'+settings.rem2+'" style="width:70px"></label><label class="f">3º<input type="number" id="s_r3" value="'+settings.rem3+'" style="width:70px"></label></div></div>'+
+  '<div><h3>Conferma delle scansioni</h3><p class="muted">Dopo quanti giorni senza conferma del distributore i prolungamenti per il cliente si fermano.</p><label class="f">Termine, giorni<input type="number" id="s_cd" value="'+settings.confirmDays+'" style="width:90px"></label></div>'+
+  '<div><h3>Finestra di scansione anticipata</h3><p class="muted">Un nuovo barattolo prolunga il periodo solo quando restano al massimo questi giorni.</p><label class="f">Giorni<input type="number" id="s_es" value="'+settings.earlyScan+'" style="width:90px"></label></div>'+
+  '<div><h3>Limite IA</h3><p class="muted">Richieste all’IA per utente al giorno.</p><label class="f">Limite<input type="number" id="s_ai" value="'+settings.aiLimit+'" style="width:90px"></label></div>'+
+  '<div><h3>Soglia minima di calorie</h3><p class="muted">Sotto questo valore l’app non abbassa il fabbisogno. L’utente non può disattivare la soglia.</p><div class="row"><label class="f">Donne<input type="number" id="s_kf" value="'+settings.kcalF+'" style="width:90px"></label><label class="f">Uomini<input type="number" id="s_km" value="'+settings.kcalM+'" style="width:90px"></label></div></div>'+
+  '</div><div style="margin-top:14px"><button class="b" data-savesettings="1">Salva</button></div></div>';
+}
+function vLog(){
+  var h='<div class="card"><h2>Registro accessi</h2><p class="muted">Ogni consultazione dei dati di un cliente viene registrata: chi, i dati di chi, quando e cosa ha visto. Il distributore vede il diario solo con un consenso separato del cliente.</p><div class="row" style="margin-bottom:8px"><select id="lf"><option value="">Tutti</option>'+dists.slice(0,9).map(function(d){return '<option'+(S.lf===d.name?' selected':'')+'>'+d.name+'</option>'}).join('')+'<option'+(S.lf===OWNER?' selected':'')+'>'+OWNER+'</option></select></div><div class="tw"><table><thead><tr><th>Chi</th><th>Dati di chi</th><th>Quando</th><th>Cosa ha visto</th></tr></thead><tbody>'+
+  accessLog.filter(function(r){return !S.lf||r.who===S.lf}).map(function(r){return '<tr><td>'+esc(r.who)+'</td><td>'+r.subj+'</td><td>'+fmtT(r.when)+'</td><td>'+esc(r.what)+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+  return h;
+}
+function vAi(){
+  var max=Math.max.apply(null,ai.days.map(function(x){return x.n}));
+  var tot=ai.days.reduce(function(a,x){return a+x.n},0);
+  var cost=(tot*0.012).toFixed(2).replace('.',',');
+  return '<div class="kpis"><div class="kpi"><b>'+tot+'</b><span>richieste in 14 giorni</span></div><div class="kpi"><b>'+Math.round(tot/14)+'</b><span>in media al giorno</span></div><div class="kpi"><b>~'+cost+' €</b><span>spesa in 14 giorni, indicativa</span></div><div class="kpi"><b>'+settings.aiLimit+'</b><span>limite per utente al giorno</span></div></div>'+
+  '<div class="card"><h2>Richieste all’IA per giorno</h2><div class="chart" style="margin-bottom:22px">'+ai.days.map(function(x){return '<div style="height:'+Math.round(x.n/max*100)+'%" title="'+fmt(x.d)+': '+x.n+'"><span>'+('0'+new Date(x.d).getDate()).slice(-2)+'</span></div>'}).join('')+'</div></div>'+
+  '<div class="card"><h2>Per funzione</h2>'+[['Menu del giorno',46],['Piano di allenamento',22],['Stima delle calorie da descrizione',24],['Bozze di promemoria per i distributori',8]].map(function(r){return '<div style="margin:8px 0"><div class="row" style="justify-content:space-between"><span>'+r[0]+'</span><b>'+r[1]+'%</b></div><div class="bar"><i style="width:'+r[1]+'%"></i></div></div>'}).join('')+'<p class="muted">L’IA riceve solo parametri anonimi. Nome, email e telefono non entrano nella richiesta. Il costo è indicativo e si calcola sulla spesa effettiva della chiave.</p></div>';
+}
+function vMetrics(){
+  return '<div class="card"><h2>Metriche di successo</h2><p class="muted">Gli eventi si raccolgono dal primo giorno senza nomi né email. I valori obiettivo li fissa il proprietario dopo il pilota. Le cifre della demo sono di prova.</p><div class="tw"><table><thead><tr><th>Metrica</th><th>Definizione</th><th>Ora</th><th>Rispetto alla settimana scorsa</th></tr></thead><tbody>'+
+  metrics.map(function(m){var good=m[3].charAt(0)==='+'||(m[0]==='Annullamenti rapidi'&&m[3].charAt(0)==='-');return '<tr><td><b>'+m[0]+'</b></td><td class="muted">'+m[1]+'</td><td><b>'+m[2]+'</b></td><td><span class="pill '+(good?'g':'')+'">'+m[3]+'</span></td></tr>'}).join('')+'</tbody></table></div></div>';
+}
+function vFinance(){
+  var rows=dists.filter(function(d){return d.status==='active'}).map(function(d){
+    var rev=d.paying*fin.price, st=rev*fin.store/100, net=rev-st, share=net*d.share/100, fee=d.fee, owner=net-share+fee;
+    return {d:d,rev:rev,st:st,share:share,fee:fee,owner:owner}});
+  var t=function(k){return rows.reduce(function(a,r){return a+r[k]},0)};
+  var m=function(n){return n.toFixed(0)+' €'};
+  return '<div class="card"><h2>Ricavi e costi per distributore</h2><p class="muted">Calcolo indicativo mensile. Cambia prezzo e commissione dello store e le cifre si ricalcolano.</p><div class="row"><label class="f">Prezzo del periodo a pagamento, €<input type="number" id="f_price" value="'+fin.price+'" style="width:110px"></label><label class="f">Commissione dello store, %<input type="number" id="f_store" value="'+fin.store+'" style="width:110px"></label><button class="b" data-fin="1" style="align-self:flex-end">Ricalcola</button><button class="b n" data-fincopy="1" style="align-self:flex-end">Copia come CSV</button></div></div>'+
+  '<div class="card"><div class="tw"><table><thead><tr><th>Distributore</th><th>Paganti</th><th>Ricavi</th><th>Commissione store</th><th>Quota del distributore</th><th>Quota area</th><th>Totale al proprietario</th></tr></thead><tbody>'+
+  rows.map(function(r){return '<tr><td>'+esc(r.d.name)+'</td><td>'+r.d.paying+'</td><td>'+m(r.rev)+'</td><td>'+m(r.st)+'</td><td>'+m(r.share)+'</td><td>'+m(r.fee)+'</td><td><b>'+m(r.owner)+'</b></td></tr>'}).join('')+
+  '<tr><td><b>Totale</b></td><td><b>'+rows.reduce(function(a,r){return a+r.d.paying},0)+'</b></td><td><b>'+m(t('rev'))+'</b></td><td><b>'+m(t('st'))+'</b></td><td><b>'+m(t('share'))+'</b></td><td><b>'+m(t('fee'))+'</b></td><td><b>'+m(t('owner'))+'</b></td></tr></tbody></table></div></div>';
+}
+function vSupport(){
+  return '<div class="card"><h2>Account</h2><p class="muted">Blocco di un account. Le email sono nascoste: il proprietario vede solo ciò che serve per decidere.</p><div class="tw"><table><thead><tr><th>Account</th><th>Email</th><th>Stato</th><th></th></tr></thead><tbody>'+
+  accounts.map(function(a){return '<tr><td>'+a.label+'</td><td class="muted">'+a.email+'</td><td>'+(a.status==='active'?'<span class="pill g">attivo</span>':'<span class="pill r">bloccato</span>')+'</td><td><button class="b '+(a.status==='active'?'d':'s')+'" data-acc="'+a.id+'">'+(a.status==='active'?'Blocca':'Sblocca')+'</button></td></tr>'}).join('')+'</tbody></table></div></div>'+
+  '<div class="card"><h2>Richieste di esportazione e cancellazione dei dati <span class="tag">da aggiungere al capitolato</span></h2><p class="muted">L’utente ha il diritto di esportare e cancellare i propri dati. La cancellazione si completa entro 30 giorni.</p><div class="tw"><table><thead><tr><th>Account</th><th>Richiesta</th><th>Ricevuta</th><th>Restano</th><th></th></tr></thead><tbody>'+
+  gdpr.map(function(g){var left=30-Math.floor((NOW-g.date)/DAY);return '<tr><td>'+g.user+'</td><td>'+g.type+'</td><td>'+fmt(g.date)+'</td><td>'+(g.st==='new'?'<span class="pill '+(left<=10?'a':'')+'">'+left+' gg</span>':'')+'</td><td>'+(g.st==='new'?'<button class="b" data-gd="'+g.id+'">Completata</button>':'<span class="pill g">completata</span>')+'</td></tr>'}).join('')+'</tbody></table></div></div>'+
+  '<div class="card"><h2>Richieste all’assistenza <span class="tag">da aggiungere al capitolato</span></h2><p class="muted">Risposta entro un giorno lavorativo. Temi frequenti: perché mi hanno addebitato, come annullare, prodotto non trovato alla scansione.</p><div class="tw"><table><thead><tr><th>Account</th><th>Argomento</th><th>Quando</th><th></th></tr></thead><tbody>'+
+  tickets.map(function(t){return '<tr><td>'+t.user+'</td><td>'+t.topic+'</td><td>'+fmt(t.date)+'</td><td>'+(t.st==='new'?'<button class="b" data-tk="'+t.id+'">Risposto</button>':'<span class="pill g">chiusa</span>')+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+}
+function vCover(){
+  var ok=function(){return '<span class="pill g">presente nella demo</span>'};
+  var part=function(){return '<span class="pill a">in parte</span>'};
+  var no=function(){return '<span class="pill r">no</span>'};
+  var rows=[
+   ['Riepilogo di tutti i distributori: clienti, paganti, scansioni in attesa, barattoli in esaurimento','Proprietario, Riepilogo',ok],
+   ['Aggiungere e disattivare distributori, ognuno con il proprio codice','Proprietario, Distributori',ok],
+   ['Condizioni per ciascuno: quota area e percentuale sui paganti','Proprietario, Distributori',ok],
+   ['Assegnare a mano i clienti senza codice','Proprietario, Verifiche',ok],
+   ['Cambio di distributore solo con approvazione, storico dei cambi','Proprietario, Verifiche',ok],
+   ['Elenco degli account sospetti da verificare a mano','Proprietario, Verifiche',ok],
+   ['Bloccare gli account','Proprietario, Account e assistenza',ok],
+   ['Catalogo per mercato, caricamento da CSV','Proprietario, Catalogo',part],
+   ['Impostazioni: promemoria, termine di conferma, limite IA, soglia minima di calorie','Proprietario, Impostazioni',ok],
+   ['Registro degli accessi ai dati dei clienti','Proprietario, Registro accessi',ok],
+   ['Report sulla spesa IA','Proprietario, Spesa IA',ok],
+   ['Ricavi e costi per ogni distributore','Proprietario, Finanza',ok],
+   ['Metriche di successo','Proprietario, Metriche',ok],
+   ['Statistiche generali senza dati personali, esportazione','Metriche e Finanza (esportazione solo per la finanza)',part],
+   ['Creazione di coach e gruppi','no, nella prima versione il ruolo di coach coincide con quello di distributore',no],
+   ['Il distributore vede solo i propri clienti, le scadenze e lo stato della scansione','Area distributore, Clienti e Accesso e isolamento',ok],
+   ['Conferma della scansione con un tocco','Area distributore, Clienti',ok],
+   ['Caricamento dell’esportazione ordini, verifica automatica','Area distributore, Esportazione ordini',ok],
+   ['Promemoria e bozze dell’assistente IA, invio solo dopo conferma','Area distributore, Promemoria',ok],
+   ['Diario e peso del cliente solo con consenso, la consultazione finisce nel registro','Area distributore, Clienti',ok],
+   ['Codice di collegamento e link di invito','Area distributore, Collegamento e codice',ok]
+  ];
+  var extra=[
+   ['Accesso al pannello con autenticazione a due fattori e permessi diversi per i dipendenti','Senza questo, una password rubata apre i dati di tutti i clienti'],
+   ['Registro delle azioni degli amministratori (chi ha bloccato, chi ha cambiato le condizioni)','Ora il registro riguarda solo la consultazione dei dati dei clienti'],
+   ['Coda delle richieste di esportazione e cancellazione dei dati con timer di 30 giorni','Nel capitolato c’è il termine, ma manca lo strumento per il dipendente'],
+   ['Richieste all’assistenza: perché mi hanno addebitato, rimborsi, annullamenti','Nel capitolato ci sono email e modulo, ma non una postazione di lavoro'],
+   ['Rendiconti con i distributori: pagamento della quota, resoconto mensile','C’è il report, manca la contabilità dei pagamenti'],
+   ['Editor dei testi: avvertenze sulla salute, testi dei promemoria, condizioni dell’abbonamento','Per cambiarli senza pubblicare una nuova versione'],
+   ['Elenco dei barattoli e dei periodi del cliente: correzione manuale in caso di errore (con motivo)','Senza questo l’assistenza non può correggere un malfunzionamento'],
+   ['Copie di backup e ripristino, esportazione di tutti i dati per il proprietario','Requisito di affidabilità']
+  ];
+  return '<div class="card"><h2>Checklist: cosa del capitolato è coperto nel pannello</h2><p class="muted">Confronto con le sezioni 2, 4.2, 6, 7, 12, 13 e 14 del capitolato tecnico.</p>'+rows.map(function(r){return '<div class="chk"><div class="st">'+r[2]()+'</div><div><div>'+r[0]+'</div><div class="muted">'+r[1]+'</div></div></div>'}).join('')+'</div>'+
+  '<div class="card"><h2>Cosa manca nel capitolato <span class="tag">proposta</span></h2>'+extra.map(function(r){return '<div class="chk"><div class="st"><span class="pill b">da aggiungere</span></div><div><div>'+r[0]+'</div><div class="muted">'+r[1]+'</div></div></div>'}).join('')+'</div>';
+}
+
+/* ---------- schermate del distributore ---------- */
+function statusPill(c){
+  if(c.endIn<=0)return '<span class="pill r">terminato</span>';
+  if(c.endIn<=7)return '<span class="pill a">'+c.endIn+' gg</span>';
+  return '<span class="pill g">'+c.endIn+' gg</span>';
+}
+function scanPill(s){return {pending:'<span class="pill a">in attesa</span>',confirmed:'<span class="pill g">confermata</span>',rejected:'<span class="pill r">rifiutata</span>'}[s]}
+function distHead(){
+  var d=dists.filter(function(x){return x.id===ME})[0];
+  var pend=clients.filter(function(c){return c.scan==='pending'}).length, end=clients.filter(function(c){return c.endIn<=7}).length;
+  return '<div class="note ok">Stai guardando l’area di: <b>'+esc(d.name)+'</b>. Si vedono solo i clienti di questo distributore. La consultazione dei dati viene registrata.</div>'+
+  '<div class="kpis"><div class="kpi"><b>'+clients.length+'</b><span>clienti</span></div><div class="kpi warn"><b>'+pend+'</b><span>scansioni in attesa di conferma</span></div><div class="kpi warn"><b>'+end+'</b><span>periodo in scadenza</span></div><div class="kpi good"><b>'+clients.filter(function(c){return c.paid}).length+'</b><span>con periodo a pagamento</span></div></div>';
+}
+function vClients(){
+  return distHead()+'<div class="card"><h2>Clienti</h2><div class="tw"><table><thead><tr><th>Cliente</th><th>Fine periodo</th><th>Barattolo</th><th>Scansione</th><th>Consenso al diario</th><th></th></tr></thead><tbody>'+
+  clients.slice().sort(function(a,b){return a.endIn-b.endIn}).map(function(c){return '<tr><td><b>'+c.name+'</b></td><td>'+fmt(NOW+c.endIn*DAY)+' '+statusPill(c)+'</td><td>'+c.jar+' gg</td><td>'+scanPill(c.scan)+'</td><td>'+(c.consent?'<span class="pill g">sì</span>':'<span class="pill">no</span>')+'</td><td><div class="row">'+
+   (c.scan==='pending'?'<button class="b" data-cs="ok:'+c.id+'">Conferma</button><button class="b n" data-cs="no:'+c.id+'">Rifiuta</button>':'')+
+   '<button class="b s" data-cv="'+c.id+'">Apri</button></div></td></tr>'}).join('')+'</tbody></table></div></div>';
+}
+var SAMPLE_ORDERS='client,date,product\nCliente 1001,'+fmt(NOW-2*DAY)+',Frullato proteico 21 giorni\nCliente 1002,'+fmt(NOW-1*DAY)+',Miscela proteica 30 giorni\nCliente 1006,'+fmt(NOW-3*DAY)+',Frullato proteico 21 giorni\nCliente 1099,'+fmt(NOW-4*DAY)+',Miscela proteica 30 giorni';
+function vOrders(){
+  var h=distHead()+'<div class="card"><h2>Esportazione ordini</h2><p class="muted">Carica un file CSV con gli ordini dei tuoi clienti (colonne: client, date, product). Le corrispondenze con le scansioni in attesa vengono confermate in automatico. Se non c’è un’esportazione automatica, la conferma resta manuale.</p><div class="row"><label class="b" style="cursor:pointer">Scegli un file CSV<input id="orders" type="file" accept=".csv,text/csv" style="display:none"></label><button class="b s" data-ordersample="1">Prova con un esempio</button></div></div>';
+  if(S.ordersResult){var r=S.ordersResult;h+='<div class="card"><h2>Risultato del confronto</h2><div class="kpis"><div class="kpi good"><b>'+r.ok.length+'</b><span>confermate</span></div><div class="kpi warn"><b>'+r.none.length+'</b><span>nessuna scansione o già gestita</span></div><div class="kpi bad"><b>'+r.foreign.length+'</b><span>non sono tuoi clienti, saltati</span></div></div>'+
+   (r.ok.length?'<p>Confermate: '+r.ok.map(esc).join(', ')+'</p>':'')+(r.none.length?'<p class="muted">Senza scansione: '+r.none.map(esc).join(', ')+'</p>':'')+(r.foreign.length?'<p class="muted">Non sono tuoi clienti: '+r.foreign.map(esc).join(', ')+'. I dati di altri distributori non vengono elaborati.</p>':'')+'</div>'}
+  return h;
+}
+function vRemind(){
+  var left=drafts.filter(function(d){return !d.sent});
+  var h=distHead()+'<div class="card"><h2>Promemoria dall’assistente IA</h2><p class="muted">Una volta a settimana l’assistente raccoglie i clienti con il barattolo in esaurimento (7 giorni o meno) e prepara le bozze. Alla richiesta all’IA vanno solo nome e scadenza, senza diario né analisi. Niente parte finché non confermi.</p>';
+  if(!left.length)h+='<div class="note ok">Tutti i promemoria sono stati inviati.</div>';
+  else{
+    h+=left.map(function(d){return '<div style="border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0"><div class="row" style="justify-content:space-between"><label class="row"><input type="checkbox" data-dsel="'+d.cid+'"'+(d.on?' checked':'')+'> <b>'+d.name+'</b></label><span class="muted">bozza dell’IA, modificabile</span></div><textarea data-dtext="'+d.cid+'">'+esc(d.text)+'</textarea></div>'}).join('')+
+    '<div class="row"><button class="b" data-sendall="1">Invia i selezionati ('+left.filter(function(d){return d.on}).length+')</button></div>';
+  }
+  return h+'</div>';
+}
+function vLink(){
+  var d=dists.filter(function(x){return x.id===ME})[0];
+  return distHead()+'<div class="card"><h2>Collegamento dei clienti</h2><p class="muted">Il cliente inserisce il tuo codice alla registrazione o apre il link. È legato a un solo distributore. La scansione del cliente la confermi solo tu.</p><div class="grid2"><div><label class="f">Il tuo codice<input readonly value="'+d.code+'" id="mycode"></label><div class="row" style="margin-top:8px"><button class="b s" data-copy="'+d.code+'">Copia il codice</button></div></div><div><label class="f">Link di invito<input readonly value="https://example.app/join/'+d.code+'" id="mylink"></label><div class="row" style="margin-top:8px"><button class="b s" data-copy="https://example.app/join/'+d.code+'">Copia il link</button></div></div></div><p class="muted" style="margin-top:12px">Il link è di prova e nella demo non porta da nessuna parte.</p></div>'+
+  '<div class="card"><h2>Se vieni disattivato</h2><p class="muted">I clienti passano al proprietario della piattaforma fino alla riassegnazione. I dati dei clienti non vengono cancellati.</p></div>';
+}
+function vIso(){
+  return distHead()+'<div class="card"><h2>Chi vede cosa</h2><div class="tw"><table><thead><tr><th>Dati del cliente</th><th>Distributore</th></tr></thead><tbody><tr><td>Scadenze del periodo, stato della scansione</td><td><span class="pill g">vede</span></td></tr><tr><td>Diario, peso, analisi</td><td><span class="pill a">solo con consenso separato del cliente</span></td></tr><tr><td>Clienti di altri distributori</td><td><span class="pill r">non vede</span></td></tr></tbody></table></div>'+
+  '<h3>Verifica dell’isolamento</h3><p class="muted">Le richieste del distributore sul server sono sempre filtrate in base al suo identificativo, e questo si controlla con un test automatico. Premi il pulsante per vedere cosa succede se si prova ad aprire un cliente altrui.</p><div class="row"><button class="b d" data-foreign="1">Apri un cliente di un altro distributore</button></div></div>';
+}
+
+/* ---------- rendering ---------- */
+function render(){
+  renderNav();
+  var v={summary:vSummary,dists:vDists,review:vReview,catalog:vCatalog,settings:vSettings,log:vLog,ai:vAi,metrics:vMetrics,finance:vFinance,support:vSupport,cover:vCover,clients:vClients,orders:vOrders,remind:vRemind,link:vLink,iso:vIso}[S.tab];
+  $('#main').innerHTML=v();
+  bind();
+}
+function logAccess(who,subj,what){accessLog.unshift({who:who,subj:subj,when:Date.now(),what:what})}
+function parseCsv(text){
+  var lines=text.replace(/\r/g,'').split('\n').filter(function(l){return l.trim()});
+  return lines.map(function(l){return l.split(/[;,]/).map(function(x){return x.trim()})});
+}
+
+function bind(){
+  var m=$('#main');
+  m.querySelectorAll('[data-open]').forEach(function(e){e.addEventListener('click',function(){var id=+e.getAttribute('data-open');logAccess(OWNER,'Area: '+distName(id),'Aperta l’area del distributore');ME=id;if(id!==3){makeClientsFor(id)}else{clients=baseClients();makeDrafts()}S.role='dist';S.tab='clients';render();toast('Aperta l’area di: '+distName(id))})});
+  m.querySelectorAll('[data-fee]').forEach(function(e){e.addEventListener('change',function(){dists.filter(function(d){return d.id==e.getAttribute('data-fee')})[0].fee=+e.value;toast('Condizioni salvate')})});
+  m.querySelectorAll('[data-share]').forEach(function(e){e.addEventListener('change',function(){dists.filter(function(d){return d.id==e.getAttribute('data-share')})[0].share=+e.value;toast('Condizioni salvate')})});
+  m.querySelectorAll('[data-disable]').forEach(function(e){e.addEventListener('click',function(){var id=+e.getAttribute('data-disable');var d=dists.filter(function(x){return x.id===id})[0];
+    modal('<h2 style="margin-top:0">Disattivare il distributore?</h2><p>'+esc(d.name)+' perderà l’accesso alla sua area. I suoi '+d.clients+' clienti passeranno al proprietario della piattaforma fino alla riassegnazione. I dati non vengono cancellati.</p><div class="row"><button class="b d" id="mDo">Disattiva</button><button class="b n" id="mNo">Annulla</button></div>');
+    $('#mNo').onclick=closeModal;$('#mDo').onclick=function(){d.status='disabled';unassigned.push({id:unassigned.length+1,user:'Clienti di '+d.name+' ('+d.clients+')',country:'-',assign:''});closeModal();toast('Distributore disattivato, i clienti passano al proprietario');render()}})});
+  m.querySelectorAll('[data-enable]').forEach(function(e){e.addEventListener('click',function(){dists.filter(function(x){return x.id==e.getAttribute('data-enable')})[0].status='active';toast('Distributore riattivato');render()})});
+  m.querySelectorAll('[data-adddist]').forEach(function(e){e.addEventListener('click',function(){var n=$('#nd_name').value.trim();if(!n){toast('Inserisci il nome');return}var id=dists.length+1;var code='D-'+Math.random().toString(36).slice(2,6).toUpperCase()+(10+id);dists.push({id:id,name:n,code:code,status:'active',clients:0,paying:0,pending:0,ending:0,fee:+$('#nd_fee').value||0,share:+$('#nd_share').value||0});toast('Creato. Codice: '+code);render()})});
+  m.querySelectorAll('[data-ver]').forEach(function(e){e.addEventListener('click',function(){S.ver=e.getAttribute('data-ver');render()})});
+  m.querySelectorAll('[data-sus]').forEach(function(e){e.addEventListener('click',function(){var p=e.getAttribute('data-sus').split(':');suspicious.filter(function(s){return s.id==p[1]})[0].st=p[0];logAccess(OWNER,'Account '+p[1],'Verifica di un account sospetto: '+({ok:'accettata',no:'rifiutata',blk:'bloccato'}[p[0]]));render()})});
+  m.querySelectorAll('[data-assign]').forEach(function(e){e.addEventListener('click',function(){var id=e.getAttribute('data-assign');var u=unassigned.filter(function(x){return x.id==id})[0];u.assign=$('#as'+id).value;logAccess(OWNER,u.user,'Assegnazione del distributore');toast('Assegnato a: '+distName(u.assign));render()})});
+  m.querySelectorAll('[data-chg]').forEach(function(e){e.addEventListener('click',function(){var p=e.getAttribute('data-chg').split(':');var c=changes.filter(function(x){return x.id==p[1]})[0];c.st=p[0];if(p[0]==='ok')changeHistory.unshift({client:c.client,from:distName(c.from),to:distName(c.to),date:Date.now(),by:OWNER});render()})});
+  var mk=$('#mk');if(mk)mk.addEventListener('change',function(){S.market=mk.value;render()});
+  var cf=$('#cf');if(cf)cf.addEventListener('input',function(){S.flt=cf.value;var pos=cf.selectionStart;render();var n=$('#cf');n.focus();n.setSelectionRange(pos,pos)});
+  var csv=$('#csv');if(csv)csv.addEventListener('change',function(){var f=csv.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var rows=parseCsv(String(r.result));var head=rows[0]&&rows[0][0].toLowerCase();if(head&&/mercato|market/.test(head))rows=rows.slice(1);var ok=[],bad=[];rows.forEach(function(x,i){if(x.length<8||isNaN(+x[4]))bad.push({n:i+2,why:'mancano dei campi'});else ok.push([x[0],x[1],x[2],x[3],+x[4],+x[5],+x[6],+x[7]])});S.csvPreview={ok:ok,bad:bad};render()};r.readAsText(f)});
+  m.querySelectorAll('[data-csvsample]').forEach(function(e){e.addEventListener('click',function(){copyText('market,barcode,name,serving,kcal,protein,fat,carbs\nEstonia,4600000007009,Esempio: barretta,35 g,150,12,5,15',function(){toast('Esempio copiato. Salvalo in un file .csv e caricalo')})})});
+  m.querySelectorAll('[data-csvgo]').forEach(function(e){e.addEventListener('click',function(){S.csvPreview.ok.forEach(function(r){catalog.push(r)});toast('Voci aggiunte: '+S.csvPreview.ok.length);S.csvPreview=null;render()})});
+  m.querySelectorAll('[data-csvno]').forEach(function(e){e.addEventListener('click',function(){S.csvPreview=null;render()})});
+  m.querySelectorAll('[data-savesettings]').forEach(function(e){e.addEventListener('click',function(){settings.rem1=+$('#s_r1').value;settings.rem2=+$('#s_r2').value;settings.rem3=+$('#s_r3').value;settings.confirmDays=+$('#s_cd').value;settings.earlyScan=+$('#s_es').value;settings.aiLimit=+$('#s_ai').value;settings.kcalF=+$('#s_kf').value;settings.kcalM=+$('#s_km').value;logAccess(OWNER,'Impostazioni della piattaforma','Impostazioni modificate');toast('Impostazioni salvate')})});
+  var lf=$('#lf');if(lf)lf.addEventListener('change',function(){S.lf=lf.value;render()});
+  m.querySelectorAll('[data-fin]').forEach(function(e){e.addEventListener('click',function(){fin.price=+$('#f_price').value||0;fin.store=+$('#f_store').value||0;render()})});
+  m.querySelectorAll('[data-fincopy]').forEach(function(e){e.addEventListener('click',function(){var t='distributor,paying,revenue\n'+dists.map(function(d){return d.name+','+d.paying+','+(d.paying*fin.price)}).join('\n');copyText(t,function(){toast('Copiato')})})});
+  m.querySelectorAll('[data-acc]').forEach(function(e){e.addEventListener('click',function(){var a=accounts.filter(function(x){return x.id===e.getAttribute('data-acc')})[0];a.status=a.status==='active'?'blocked':'active';logAccess(OWNER,a.label,a.status==='blocked'?'Blocco dell’account':'Sblocco dell’account');render()})});
+  m.querySelectorAll('[data-gd]').forEach(function(e){e.addEventListener('click',function(){gdpr.filter(function(x){return x.id==e.getAttribute('data-gd')})[0].st='done';render()})});
+  m.querySelectorAll('[data-tk]').forEach(function(e){e.addEventListener('click',function(){tickets.filter(function(x){return x.id==e.getAttribute('data-tk')})[0].st='done';render()})});
+  m.querySelectorAll('[data-cs]').forEach(function(e){e.addEventListener('click',function(){var p=e.getAttribute('data-cs').split(':');var c=clients.filter(function(x){return x.id==p[1]})[0];c.scan=p[0]==='ok'?'confirmed':'rejected';logAccess(distName(ME),c.name,'Conferma della scansione: '+(p[0]==='ok'?'confermata':'rifiutata'));toast(p[0]==='ok'?'Scansione confermata, periodo consolidato':'Scansione rifiutata, i prolungamenti si fermano');render()})});
+  m.querySelectorAll('[data-cv]').forEach(function(e){e.addEventListener('click',function(){var c=clients.filter(function(x){return x.id==e.getAttribute('data-cv')})[0];
+    logAccess(distName(ME),c.name,c.consent?'Diario alimentare (con consenso del cliente)':'Scadenze e stato della scansione');
+    modal('<h2 style="margin-top:0">'+c.name+'</h2><p>Fine periodo: <b>'+fmt(NOW+c.endIn*DAY)+'</b>. Barattolo da '+c.jar+' giorni. Scansione: '+scanPill(c.scan)+'</p>'+(c.consent?'<h3>Diario di oggi</h3><p class="muted">Colazione: porridge, 310 kcal<br>Pranzo: pollo con grano saraceno, 540 kcal<br>Peso: 68,4 kg (all’inizio 70,0 kg)</p><div class="note ok">Il cliente ha dato il consenso all’accesso al diario. La consultazione è registrata.</div>':'<div class="note w">Il cliente non ha dato il consenso all’accesso a diario e peso. Sono nascosti.</div>')+'<div class="row" style="margin-top:12px"><button class="b n" id="mNo">Chiudi</button></div>');$('#mNo').onclick=closeModal})});
+  var orders=$('#orders');if(orders)orders.addEventListener('change',function(){var f=orders.files[0];if(!f)return;var r=new FileReader();r.onload=function(){matchOrders(String(r.result))};r.readAsText(f)});
+  m.querySelectorAll('[data-ordersample]').forEach(function(e){e.addEventListener('click',function(){matchOrders(SAMPLE_ORDERS)})});
+  m.querySelectorAll('[data-dsel]').forEach(function(e){e.addEventListener('change',function(){drafts.filter(function(d){return d.cid==e.getAttribute('data-dsel')})[0].on=e.checked;render()})});
+  m.querySelectorAll('[data-dtext]').forEach(function(e){e.addEventListener('input',function(){drafts.filter(function(d){return d.cid==e.getAttribute('data-dtext')})[0].text=e.value})});
+  m.querySelectorAll('[data-sendall]').forEach(function(e){e.addEventListener('click',function(){var n=0;drafts.forEach(function(d){if(d.on&&!d.sent){d.sent=true;n++}});toast(n?'Inviati: '+n+' (nella demo non parte nessun messaggio reale)':'Nessun messaggio selezionato');render()})});
+  m.querySelectorAll('[data-copy]').forEach(function(e){e.addEventListener('click',function(){copyText(e.getAttribute('data-copy'),function(){toast('Copiato')})})});
+  m.querySelectorAll('[data-foreign]').forEach(function(e){e.addEventListener('click',function(){logAccess(distName(ME),'Cliente di un altro distributore','RIFIUTATO: accesso negato');modal('<h2 style="margin-top:0">Accesso negato</h2><p>Questo cliente è legato a un altro distributore. Il server non restituisce questi dati né nell’interfaccia né con una richiesta diretta. Il tentativo è registrato nel registro accessi.</p><div class="row"><button class="b n" id="mNo">Ho capito</button></div>');$('#mNo').onclick=closeModal})});
+}
+function makeClientsFor(id){
+  var n=dists.filter(function(d){return d.id===id})[0].clients;var k=Math.min(10,n||0);
+  clients=[];for(var i=0;i<k;i++){var end=[2,9,-2,15,6,22,1,11,4,18][i%10];clients.push({id:i+1,name:'Cliente '+(id*100+i+1),endIn:end,scan:end<=0?'rejected':(i%3===0?'pending':'confirmed'),consent:i%2===0,jar:i%3===1?30:21,paid:i%5===2})}
+  makeDrafts();
+}
+function matchOrders(text){
+  var rows=parseCsv(text);if(rows[0]&&/client|cliente/i.test(rows[0][0]))rows=rows.slice(1);
+  var res={ok:[],none:[],foreign:[]};
+  rows.forEach(function(r){var c=clients.filter(function(x){return x.name===r[0]})[0];
+    if(!c){res.foreign.push(r[0]);return}
+    if(c.scan==='pending'){c.scan='confirmed';res.ok.push(c.name)}else res.none.push(c.name)});
+  logAccess(distName(ME),'Esportazione ordini','Verifica automatica degli ordini: confermate '+res.ok.length);
+  S.ordersResult=res;render();toast('Verifica completata');
+}
+function copyText(t,cb){
+  try{navigator.clipboard.writeText(t).then(cb,function(){fallbackCopy(t)})}catch(e){fallbackCopy(t)}
+}
+function fallbackCopy(t){modal('<h2 style="margin-top:0">Copia a mano</h2><textarea readonly style="min-height:140px">'+esc(t)+'</textarea><div class="row" style="margin-top:10px"><button class="b n" id="mNo">Chiudi</button></div>');$('#mNo').onclick=closeModal}
+render();
+})();
+</script>
+</body>
+</html>
