@@ -305,12 +305,13 @@ details.more{margin-top:14px}details.more>summary{cursor:pointer;font-weight:800
  </div></details>
  <h2 class="s rv">Fai due conti</h2>
  <div class="calc rv"><p class="cn">Metti i tuoi numeri. È un esempio di calcolo, non una promessa di risultato.</p>
-  <label><span>I tuoi clienti attivi: <b id="cc_v">25</b></span><input id="cc_c" type="range" min="5" max="100" value="25"></label>
-  <label><span>Quanto guadagni per ogni riordino: <b id="cc_mv">10</b> €</span><input id="cc_m" type="range" min="1" max="50" value="10"></label>
+  <label><span>I tuoi clienti attivi: <b id="cc_v">60</b></span><input id="cc_c" type="range" min="5" max="300" value="60"></label>
+  <label><span>Quanto guadagni per ogni riordino: <b id="cc_mv">12</b> €</span><input id="cc_m" type="range" min="1" max="50" value="12"></label>
+  <label><span>Quante volte al mese riordina chi riordina: <b id="cc_fv">2</b></span><input id="cc_f" type="range" min="1" max="4" value="2"></label>
   <label><span>Quanti riordinano oggi: <b id="cc_pv">40</b>%</span><input id="cc_p" type="range" min="5" max="90" value="40"></label>
   <div class="cu">Se con promemoria puntuali riordinano in più:<div class="chips" id="cc_u"><button type="button" data-u="5">+5 punti</button><button type="button" data-u="10" class="on">+10 punti</button><button type="button" data-u="20">+20 punti</button></div></div>
   <div class="cres"><div><span>Riordini oggi</span><b id="cc_a">10</b></div><div class="arr">→</div><div><span>Con i promemoria</span><b id="cc_b">13</b></div><div class="plus"><span>in più</span><b id="cc_d">+3</b></div></div>
-  <div class="cmoney"><span>In più per te, circa ogni mese</span><b id="cc_e">+30 €</b><small>Accesso: 29 € al mese, oggi 0 € con il codice promo. Esempio di calcolo, non una promessa.</small></div>
+  <div class="cmoney"><span>In più per te, circa ogni mese</span><b id="cc_e">+144 €</b><small id="cc_y">In un anno: +1.728 €. Accesso: 29 € al mese, oggi 0 € con il codice promo. Esempio di calcolo, non una promessa.</small></div>
  </div>
  <h2 class="s rv">Quanto costa</h2>
  <div class="price rv">
@@ -805,8 +806,8 @@ var els=L.querySelectorAll('.rv,.flow');var io=new IntersectionObserver(function
 setTimeout(function(){L.querySelectorAll('.stats [data-n]').forEach(cnt)},500);
 function go(i){document.getElementById(i).scrollIntoView({behavior:'smooth',block:'start'})}
 document.getElementById('lgTop').onclick=function(){go('lgRegC')};document.getElementById('lgStick').onclick=function(){go('lgRegC')};})();</script>
-<script>(function(){function q(i){return document.getElementById(i)}var u=10;function up(){var c=+q('cc_c').value,pc=+q('cc_p').value;q('cc_v').textContent=c;q('cc_pv').textContent=pc;var a=Math.round(c*pc/100),b=Math.round(c*Math.min(100,pc+u)/100);q('cc_a').textContent=a;q('cc_b').textContent=b;q('cc_d').textContent='+'+(b-a);var m=+q('cc_m').value;q('cc_mv').textContent=m;q('cc_e').textContent='+'+((b-a)*m)+' €'}
-q('cc_c').oninput=up;q('cc_m').oninput=up;q('cc_p').oninput=up;document.querySelectorAll('#cc_u button').forEach(function(b){b.onclick=function(){u=+b.getAttribute('data-u');document.querySelectorAll('#cc_u button').forEach(function(x){x.classList.toggle('on',x===b)});up()}});up();
+<script>(function(){function q(i){return document.getElementById(i)}var u=10;function up(){var c=+q('cc_c').value,pc=+q('cc_p').value;q('cc_v').textContent=c;q('cc_pv').textContent=pc;var a=Math.round(c*pc/100),b=Math.round(c*Math.min(100,pc+u)/100);q('cc_a').textContent=a;q('cc_b').textContent=b;q('cc_d').textContent='+'+(b-a);var m=+q('cc_m').value;q('cc_mv').textContent=m;var f=+q('cc_f').value;q('cc_fv').textContent=f;var mo=(b-a)*m*f;q('cc_e').textContent='+'+mo.toLocaleString('it-IT')+' €';q('cc_y').textContent='In un anno: +'+(mo*12).toLocaleString('it-IT')+' €. Accesso: 29 € al mese, oggi 0 € con il codice promo. Esempio di calcolo, non una promessa.'}
+q('cc_c').oninput=up;q('cc_m').oninput=up;q('cc_p').oninput=up;q('cc_f').oninput=up;document.querySelectorAll('#cc_u button').forEach(function(b){b.onclick=function(){u=+b.getAttribute('data-u');document.querySelectorAll('#cc_u button').forEach(function(x){x.classList.toggle('on',x===b)});up()}});up();
 var st=q('lgStick'),fs=[q('lgRegC'),q('lgInC')].filter(Boolean),vis={};if('IntersectionObserver' in window){var o=new IntersectionObserver(function(a){a.forEach(function(x){vis[x.target.id]=x.isIntersecting});st.style.visibility=(vis.lgRegC||vis.lgInC)?'hidden':'visible'},{threshold:.05});fs.forEach(function(f){o.observe(f)})}})();</script>
 <script>(function(){function q(i){return document.getElementById(i)}
 var cs=document.querySelectorAll('.qi input'),T=['Spunta quello che ti succede','Qualcosa ti sfugge','Qualcosa ti sfugge','Questa area è fatta per te','Questa area è fatta per te','Ti serve davvero questa area'],P=['','Ogni cliente dimenticato è un riordino perso.','Ogni cliente dimenticato è un riordino perso.','Ti dice a chi scrivere e quando, e prepara la bozza.','Ti dice a chi scrivere e quando, e prepara la bozza.','Ti dice a chi scrivere e quando, e prepara la bozza.'];
