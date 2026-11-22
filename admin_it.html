@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
-<head><script>(function(){var H="99c5ba7226c882ab3f8367a83347c4f7adb6fa57e22f986c66c89a6660a8f48f",K="g21ok";try{if(localStorage.getItem(K)===H)return}catch(e){}
-document.documentElement.style.visibility="hidden";
-function hex(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
-window.addEventListener("DOMContentLoaded",function(){var o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0A0B0E;color:#F8F9FA;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,sans-serif;visibility:visible";
-o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#FF6913;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
-document.body.appendChild(o);document.documentElement.style.visibility="visible";
-o.querySelector("form").onsubmit=function(ev){ev.preventDefault();var v=o.querySelector("input").value.trim();
-crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(hex(d)===H){try{localStorage.setItem(K,H)}catch(e){}o.remove()}else{o.querySelector("#e").textContent="Codice non corretto"}})}})})();</script>
+<head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; worker-src 'self' blob:; media-src 'self' blob: data:; base-uri 'self'; form-action 'self' https://script.google.com; object-src 'none'"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pannello di gestione «21 giorni»</title>
+<title>Pannello di gestione 21 giorni</title>
 <style>
 :root{--bg:#0A0B0E;--card:#12141C;--ink:#F8F9FA;--muted:#9CA3AF;--line:#2B2E3B;--g:#FF6913;--gd:#FF8A2B;--gs:#2E1809;--am:#F08A3C;--ams:#33200F;--rd:#EF7070;--rds:#3A1D1F;--bl:#6AA8E6;--bls:#1B2638;--soft:#1B1E2A;--onbrand:#1A0B02;color-scheme:dark}
 *{box-sizing:border-box}
@@ -124,7 +117,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:60
  <div class="foot" style="margin-top:16px">Sito indipendente. Versione demo, i dati mostrati sono di prova.</div>
 </div></div>
 <header>
-  <h1>Pannello «21 giorni» <span class="pill">demo, dati di prova</span></h1>
+  <h1>Pannello 21 giorni <span class="pill">demo, dati di prova</span></h1>
   <div class="seg" id="roleSeg">
     <button data-role="owner" class="on">Proprietario della piattaforma</button>
     <button data-role="dist">Area personal advisor</button>
