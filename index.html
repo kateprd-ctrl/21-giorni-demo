@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
-<head><script>(function(){var H="99c5ba7226c882ab3f8367a83347c4f7adb6fa57e22f986c66c89a6660a8f48f",K="g21ok";try{if(localStorage.getItem(K)===H)return}catch(e){}
-document.documentElement.style.visibility="hidden";
-function hex(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
-window.addEventListener("DOMContentLoaded",function(){var o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0A0B0E;color:#F8F9FA;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,sans-serif;visibility:visible";
-o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#FF6913;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
-document.body.appendChild(o);document.documentElement.style.visibility="visible";
-o.querySelector("form").onsubmit=function(ev){ev.preventDefault();var v=o.querySelector("input").value.trim();
-crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(hex(d)===H){try{localStorage.setItem(K,H)}catch(e){}o.remove()}else{o.querySelector("#e").textContent="Codice non corretto"}})}})})();</script>
+<head>
 <meta charset="utf-8">
 <meta property="og:type" content="website"><meta property="og:title" content="«21 giorni»: app e sito per i personal advisor, demo"><meta property="og:description" content="Non è una dieta. È uno stile di vita. Prova l’app per il cliente, il sito per i personal advisor e le automazioni."><meta property="og:image" content="https://kateprd-ctrl.github.io/21-giorni-demo/img/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="https://kateprd-ctrl.github.io/21-giorni-demo/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://kateprd-ctrl.github.io/21-giorni-demo/img/og.png"><meta name="description" content="Non è una dieta. È uno stile di vita. Prova l’app per il cliente, il sito per i personal advisor e le notifiche."><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; worker-src 'self' blob:; media-src 'self' blob: data:; base-uri 'self'; form-action 'self' https://script.google.com; object-src 'none'"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>«21 giorni»: app e pannello, demo</title>
@@ -122,7 +115,7 @@ details.how[open] summary:after{transform:rotate(45deg)}
     <p class="muted">Qualcosa non va, non è chiaro o manca? Scrivilo qui. Premi «Aggiungi il commento»: arriva direttamente a Ekaterina, non serve altro.</p>
     <div class="row" style="margin-top:10px">
       <div><select id="area"><option>App</option><option>Pannello del proprietario</option><option>Area del personal advisor</option><option>Capitolato tecnico</option><option>Altro</option></select></div>
-      <div><input type="text" id="who" placeholder="Il tuo nome (facoltativo)"></div>
+      <div><input type="text" id="who" placeholder="Il tuo nome (obbligatorio)" required></div>
     </div>
     <textarea id="txt" placeholder="Cosa hai notato? Scrivi la schermata e cosa ti aspettavi." style="margin-top:8px"></textarea>
     <div class="row" style="margin-top:8px"><button class="btn" id="add">Aggiungi il commento</button><button class="btn n" id="copy">Copia tutti i commenti</button></div>
@@ -153,10 +146,9 @@ build('ck1',S1,'ck1');build('ck2',S2,'ck2');
 var list=store('comments')||[];
 function show(){var d=document.getElementById('list');d.innerHTML='';
  list.forEach(function(c,i){var e=document.createElement('div');e.className='cm';var b=document.createElement('b');b.textContent=c.area+(c.who?' · '+c.who:'');
-  var p=document.createElement('div');p.textContent=c.txt;var r=document.createElement('button');r.className='btn n';r.style.cssText='margin-top:6px;padding:6px 10px;font-size:13px';r.textContent='Elimina';
-  r.onclick=function(){list.splice(i,1);store('comments',list);show()};e.appendChild(b);e.appendChild(p);e.appendChild(r);d.appendChild(e)})}
+  var p=document.createElement('div');p.textContent=c.txt;e.appendChild(b);e.appendChild(p);d.appendChild(e)})}
 show();
-document.getElementById('add').onclick=function(){var t=document.getElementById('txt').value.trim();if(!t)return;
+document.getElementById('add').onclick=function(){var t=document.getElementById('txt').value.trim();var w=document.getElementById('who');if(!w.value.trim()){w.style.borderColor='#FF6913';w.placeholder='Scrivi il tuo nome per continuare';w.focus();return}if(!t)return;
  var c={area:document.getElementById('area').value,who:document.getElementById('who').value.trim(),txt:t};list.push(c);store('comments',list);document.getElementById('txt').value='';show();
  try{fetch('https://script.google.com/macros/s/AKfycbz9K-JleJm88Y0GeCOvO4QjWWg3Ue62sVLF-6tlPQl9CMN8z3_g5woHsJtETdYA1-daQw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(c).toString()});var m=document.getElementById('add');m.textContent='Inviato ✓';setTimeout(function(){m.textContent='Aggiungi il commento'},2000)}catch(e){}};
 document.getElementById('copy').onclick=function(){
@@ -166,7 +158,11 @@ document.getElementById('copy').onclick=function(){
  try{navigator.clipboard.writeText(text).then(function(){document.getElementById('copy').textContent='Copiato ✓';setTimeout(function(){document.getElementById('copy').textContent='Copia tutti i commenti'},2000)},fb)}catch(e){fb()}};
 })();
 </script>
-<div style="text-align:center;padding:18px 0 30px"><a href="admin_it.html" style="color:#8a8f9c;font-size:13px;text-decoration:none;border-bottom:1px solid #3a3f4c">Accesso amministratore</a></div>
+<div style="text-align:center;padding:18px 0 30px"><button id="admo" type="button" style="background:none;border:0;border-bottom:1px solid #3a3f4c;color:#8a8f9c;font-size:13px;cursor:pointer;padding:0 0 2px">Accesso amministratore</button><div id="admb" style="display:none;margin-top:12px"><input id="admp" type="password" placeholder="Password" autocomplete="off" maxlength="60" style="background:#141414;border:1px solid #3a3f4c;color:#fff;border-radius:10px;padding:10px 12px;font-size:14px;width:170px"> <button id="admg" type="button" style="background:#FF6913;color:#000;border:0;border-radius:10px;padding:10px 14px;font-weight:700;font-size:14px;cursor:pointer">Entra</button><div id="adme" style="display:none;color:#8a8f9c;font-size:12px;margin-top:8px">Password errata</div></div></div>
+<script>(function(){var H="7020bce00b9c1758342de79f9baf51d0dd291f7e7e79dab3b85a8174759b8802";function q(i){return document.getElementById(i)}
+q('admo').onclick=function(){q('admb').style.display='block';q('admp').focus()};
+function go(){crypto.subtle.digest('SHA-256',new TextEncoder().encode(q('admp').value)).then(function(b){var x=Array.from(new Uint8Array(b)).map(function(v){return v.toString(16).padStart(2,'0')}).join('');if(x===H){try{sessionStorage.setItem('adm21','1')}catch(e){}location.href='admin_it.html'}else{q('adme').style.display='block';q('admp').value=''}})}
+q('admg').onclick=go;q('admp').onkeydown=function(e){if(e.key==='Enter')go()}})();</script>
 <div id="sw21"></div>
 <script>
 (function(){
