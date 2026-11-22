@@ -9,7 +9,7 @@ document.body.appendChild(o);document.documentElement.style.visibility="visible"
 o.querySelector("form").onsubmit=function(ev){ev.preventDefault();var v=o.querySelector("input").value.trim();
 crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(hex(d)===H){try{localStorage.setItem(K,H)}catch(e){}o.remove()}else{o.querySelector("#e").textContent="Codice non corretto"}})}})})();</script>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; worker-src 'self' blob:; media-src 'self' blob: data:; base-uri 'self'; form-action 'self' https://script.google.com; object-src 'none'"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pannello di gestione «21 giorni»</title>
 <style>
 :root{--bg:#0A0B0E;--card:#12141C;--ink:#F8F9FA;--muted:#9CA3AF;--line:#2B2E3B;--g:#FF6913;--gd:#FF8A2B;--gs:#2E1809;--am:#F08A3C;--ams:#33200F;--rd:#EF7070;--rds:#3A1D1F;--bl:#6AA8E6;--bls:#1B2638;--soft:#1B1E2A;--onbrand:#1A0B02;color-scheme:dark}
@@ -560,7 +560,7 @@ render();
 <script>
 (function(){
 var base=location.pathname.indexOf('/app/')>-1?'../':'';
-var items=[['Home',base+'index.html','index.html'],['App cliente',base+'app/index.html','/app/'],['Sito partner',base+'partner.html','partner'],['Notifiche',base+'tg.html','tg.html']];
+var items=[['Home',base+'index.html','index.html'],['App cliente',base+'app/index.html','/app/'],['Sito partner',base+'partner.html','partner'],['Automazioni',base+'tg.html','tg.html']];
 var box=document.getElementById('sw21');
 var css='position:fixed;left:0;top:46%;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
 box.style.cssText=css;
