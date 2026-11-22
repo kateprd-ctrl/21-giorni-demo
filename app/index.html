@@ -4,13 +4,13 @@
 document.documentElement.style.visibility="hidden";
 function hex(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
 window.addEventListener("DOMContentLoaded",function(){var o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0A0B0E;color:#F8F9FA;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,sans-serif;visibility:visible";
-o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#F2C94C;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
+o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#FF6913;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
 document.body.appendChild(o);document.documentElement.style.visibility="visible";
 o.querySelector("form").onsubmit=function(ev){ev.preventDefault();var v=o.querySelector("input").value.trim();
 crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(hex(d)===H){try{localStorage.setItem(K,H)}catch(e){}o.remove()}else{o.querySelector("#e").textContent="Codice non corretto"}})}})})();</script>
     <meta charset="utf-8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>21 giorni</title>
     <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
     <style id="expo-reset">
@@ -30,15 +30,34 @@ crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(
         flex: 1;
       }
     </style>
-  <style>input,textarea{outline:none!important}input:focus,textarea:focus{border-color:#D4AF37!important;box-shadow:0 0 0 2px rgba(212,175,55,.35)}</style></head>
+  <style>input,textarea{outline:none!important}input:focus,textarea:focus{border-color:#FF6913!important;box-shadow:0 0 0 2px rgba(255,105,19,.35)}</style></head>
 
   <body>
     <!-- Use static rendering with Expo Router to support running without JavaScript. -->
-    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <script>try{if(/[?&]reset=1/.test(location.search)){var k=[];for(var i=0;i<localStorage.length;i++){var n=localStorage.key(i);if(n&&n.indexOf('challenge21')===0)k.push(n);}k.forEach(function(n){localStorage.removeItem(n)});history.replaceState(null,'',location.pathname);}}catch(e){}</script><noscript> You need to enable JavaScript to run this app. </noscript>
     <!-- The root element for your Expo app. -->
     <div id="root"></div>
-  <script src="./_expo/static/js/web/index-52ae5d29d8a5d299c5e73cabfe4a8d7c.js" defer></script>
-<a href="../index.html#commenti" title="Lascia un commento" style="position:fixed;right:0;top:55%;width:30px;height:34px;display:flex;align-items:center;justify-content:center;background:#D4AF37;color:#14110A;text-decoration:none;font-size:15px;border-radius:10px 0 0 10px;z-index:99999;opacity:.9">💬</a>
+  <script src="./_expo/static/js/web/index-dbc55302274b39b2b38a9df231b4f757.js" defer></script>
+<a href="../index.html#commenti" title="Lascia un commento" style="position:fixed;right:0;top:55%;width:30px;height:34px;display:flex;align-items:center;justify-content:center;background:#FF6913;color:#1A0B02;text-decoration:none;font-size:15px;border-radius:10px 0 0 10px;z-index:99999;opacity:.9"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A0B02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5Z"/></svg></a>
 </html>
+<div id="sw21"></div>
+<script>
+(function(){
+var base=location.pathname.indexOf('/app/')>-1?'../':'';
+var items=[['Home',base+'index.html','index.html'],['App',base+'app/index.html','/app/'],['Pannello',base+'admin_it.html','admin_it'],['Notifiche',base+'tg.html','tg.html']];
+var box=document.getElementById('sw21');
+var css='position:fixed;left:0;top:46%;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
+box.style.cssText=css;
+var open=false;
+function cur(p){return location.pathname.indexOf(p)>-1}
+function render(){
+var h='<button id="sw21b" aria-label="Cambia vista" style="background:#FF6913;color:#1A0B02;border:0;border-radius:0 14px 14px 0;width:34px;height:52px;font-size:18px;cursor:pointer">&#8644;</button>';
+if(open){h+='<div style="position:absolute;left:36px;top:-30px;background:rgba(10,11,14,.97);border:1px solid #5a3418;border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:130px;box-shadow:0 8px 30px rgba(0,0,0,.6)">';
+items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('tg.html')):cur(it[2]);
+h+='<a href="'+it[1]+'" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:'+(a?'#1A0B02':'#F8F9FA')+';background:'+(a?'#FF8A2B':'#1B1E2A')+'">'+it[0]+'</a>';});
+h+='<a href="#" id="sw21r" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:#FF8A2B;background:transparent;border:1px solid #5a3418">&#8635; Ricomincia da capo</a></div>';}
+box.innerHTML=h;document.getElementById('sw21b').onclick=function(){open=!open;render();};var r=document.getElementById('sw21r');if(r){r.onclick=function(e){e.preventDefault();location.href=base+'app/index.html?reset=1&t='+Date.now();};}}
+render();})();
+</script>
 </body>
 </html>

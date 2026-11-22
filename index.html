@@ -4,7 +4,7 @@
 document.documentElement.style.visibility="hidden";
 function hex(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
 window.addEventListener("DOMContentLoaded",function(){var o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0A0B0E;color:#F8F9FA;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,sans-serif;visibility:visible";
-o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#F2C94C;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
+o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#FF6913;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
 document.body.appendChild(o);document.documentElement.style.visibility="visible";
 o.querySelector("form").onsubmit=function(ev){ev.preventDefault();var v=o.querySelector("input").value.trim();
 crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(hex(d)===H){try{localStorage.setItem(K,H)}catch(e){}o.remove()}else{o.querySelector("#e").textContent="Codice non corretto"}})}})})();</script>
@@ -12,18 +12,18 @@ crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>«21 giorni»: app e pannello, demo</title>
 <style>
-:root{--bg:#0A0B0E;--ink:#F8F9FA;--muted:#9CA3AF;--line:#2B2E3B;--g:#D4AF37;--gd:#F2C94C;--card:#12141C;color-scheme:dark}
+:root{--bg:#0A0B0E;--ink:#F8F9FA;--muted:#9CA3AF;--line:#2B2E3B;--g:#FF6913;--gd:#FF8A2B;--card:#12141C;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.hero{background:radial-gradient(circle at 80% 0,#2A2412,#0A0B0E 70%);border-bottom:1px solid var(--line);color:var(--ink);padding:36px 20px 44px}
+.hero{background:radial-gradient(circle at 80% 0,#2E1809,#0A0B0E 70%);border-bottom:1px solid var(--line);color:var(--ink);padding:36px 20px 44px}
 .wrap{max-width:900px;margin:0 auto}
-.hero h1{margin:0 0 8px;font-size:34px;background:linear-gradient(120deg,#F5C84C,#A8751B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1{margin:0 0 8px;font-size:34px;background:linear-gradient(120deg,#FF8A2B,#C2410C);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{margin:0;opacity:.92;max-width:620px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:-26px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
 .card h2{margin:0;font-size:20px}
 .card p{margin:0;color:var(--muted);font-size:15px}
-a.btn,button.btn{display:inline-block;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;text-decoration:none;font:inherit;font-weight:700;padding:12px 16px;border-radius:12px;text-align:center;border:0;cursor:pointer}
+a.btn,button.btn{display:inline-block;background:linear-gradient(120deg,#FF8A2B,#C2410C);color:#1A0B02;text-decoration:none;font:inherit;font-weight:700;padding:12px 16px;border-radius:12px;text-align:center;border:0;cursor:pointer}
 a.btn{margin-top:auto}
 button.btn.n{background:#1B1E2A;color:var(--ink)}
 section{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin:14px 0}
@@ -51,7 +51,8 @@ footer{padding:10px 20px 40px}
 <div class="wrap">
   <div class="cards">
     <div class="card"><h2>App</h2><p>Quella che sarà sul telefono: registrazione, diario, scanner del barattolo, menu con IA, allenamenti, 21 giorni, abbonamento. Nel browser la fotocamera è disattivata: al suo posto c’è un elenco «come se avessi scansionato».</p><a class="btn" href="app/index.html">Apri l’app</a></div>
-    <div class="card"><h2>Pannello di gestione</h2><p>Area del proprietario della piattaforma (distributori, verifica delle scansioni, catalogo, impostazioni, registro, spesa IA, metriche, finanza) e area del distributore.</p><a class="btn" href="admin_it.html">Apri il pannello</a></div>
+    <div class="card"><h2>Pannello di gestione</h2><p>Area del proprietario della piattaforma (personal advisor, verifica delle scansioni, catalogo, impostazioni, registro, spesa IA, metriche, finanza) e area del personal advisor.</p><a class="btn" href="admin_it.html">Apri il pannello</a></div>
+    <div class="card"><h2>Notifiche (Telegram, email, push)</h2><p>Come arrivano gli avvisi nel canale, per email e come push (registrazioni, scansioni, scadenze, sospetti, pagamenti, GDPR, errori) e cosa succede nell’app e nel pannello.</p><a class="btn" href="tg.html">Apri gli scenari</a></div>
   </div>
 
   <section>
@@ -66,7 +67,7 @@ footer{padding:10px 20px 40px}
     <h2>Commenti e segnalazioni</h2>
     <p class="muted">Qualcosa non va, non è chiaro o manca? Scrivilo qui. I commenti restano in questo browser e non partono da soli: alla fine premi «Copia tutti i commenti» e incolla il testo in un messaggio a Ekaterina.</p>
     <div class="row" style="margin-top:10px">
-      <div><select id="area"><option>App</option><option>Pannello del proprietario</option><option>Area del distributore</option><option>Capitolato tecnico</option><option>Altro</option></select></div>
+      <div><select id="area"><option>App</option><option>Pannello del proprietario</option><option>Area del personal advisor</option><option>Capitolato tecnico</option><option>Altro</option></select></div>
       <div><input type="text" id="who" placeholder="Il tuo nome (facoltativo)"></div>
     </div>
     <textarea id="txt" placeholder="Cosa hai notato? Scrivi la schermata e cosa ti aspettavi." style="margin-top:8px"></textarea>
@@ -75,7 +76,7 @@ footer{padding:10px 20px 40px}
     <div id="fallback" style="display:none;margin-top:8px"><p class="muted">Copia il testo qui sotto a mano:</p><textarea id="fbta" readonly></textarea></div>
   </section>
 </div>
-<footer class="wrap"><p class="muted">Progetto indipendente. Non è l’app ufficiale di nessuna azienda. Calcoli di calorie e menu sono indicativi e non sostituiscono il parere del medico. Tutti i numeri, i clienti e i distributori nella demo sono inventati. Pagamento e invio dei messaggi sono simulati.</p></footer>
+<footer class="wrap"><p class="muted">Progetto indipendente. Non è l’app ufficiale di nessuna azienda. Calcoli di calorie e menu sono indicativi e non sostituiscono il parere del medico. Tutti i numeri, i clienti e i personal advisor nella demo sono inventati. Pagamento e invio dei messaggi sono simulati.</p></footer>
 <script>
 (function(){
 var S1=['Apri l’app e completa la registrazione. Vanno bene dati qualsiasi: spunta «Ho almeno 18 anni» e il consenso.',
@@ -83,12 +84,12 @@ var S1=['Apri l’app e completa la registrazione. Vanno bene dati qualsiasi: sp
 'Apri «Altro» e premi «+14 giorni» in «Demo: avanzamento del tempo». Il periodo è finito e le sezioni «Menu», «Allenamenti» e «21 giorni» sono bloccate.',
 'Apri di nuovo «Scanner», scegli il barattolo e premi «Registra il barattolo». Il periodo gratuito si prolunga e le sezioni si riaprono.',
 'Aggiungi un alimento al diario dallo scanner, crea il menu del giorno, segna un allenamento, registra il peso in «21 giorni».',
-'In «Altro» guarda il periodo a pagamento (il pagamento è simulato), i promemoria, l’esportazione e la cancellazione dei dati e l’area del distributore.'];
-var S2=['Come proprietario: apri il Riepilogo e tocca un distributore qualsiasi per entrare nella sua area.',
-'In «Verifiche» accetta o rifiuta una scansione sospetta, assegna un cliente senza distributore, approva un cambio di distributore.',
+'In «Altro» guarda il periodo a pagamento (il pagamento è simulato), i promemoria, l’esportazione e la cancellazione dei dati e l’area del personal advisor.'];
+var S2=['Come proprietario: apri il Riepilogo e tocca un personal advisor qualsiasi per entrare nella sua area.',
+'In «Verifiche» accetta o rifiuta una scansione sospetta, assegna un cliente senza personal advisor, approva un cambio di personal advisor.',
 'In «Catalogo» carica un file CSV (c’è un esempio da copiare). In «Impostazioni» cambia i giorni dei promemoria e il limite IA.',
-'Passa ad «Area distributore» (in alto a destra): conferma una scansione, usa «Prova con un esempio» in «Esportazione ordini», invia i promemoria dopo aver letto le bozze.',
-'In «Accesso e isolamento» premi il pulsante rosso: il cliente di un altro distributore non si apre.',
+'Passa ad «Area personal advisor» (in alto a destra): conferma una scansione, usa «Prova con un esempio» in «Esportazione ordini», invia i promemoria dopo aver letto le bozze.',
+'In «Accesso e isolamento» premi il pulsante rosso: il cliente di un altro personal advisor non si apre.',
 'L’ultima scheda del proprietario, «Checklist rispetto al capitolato», mostra cosa del capitolato è già coperto e cosa va aggiunto.'];
 function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'null');localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
 function build(id,items,key){var ul=document.getElementById(id),st=store(key)||{};
@@ -109,6 +110,25 @@ document.getElementById('copy').onclick=function(){
  var fb=function(){document.getElementById('fbta').value=text;document.getElementById('fallback').style.display='block'};
  try{navigator.clipboard.writeText(text).then(function(){document.getElementById('copy').textContent='Copiato ✓';setTimeout(function(){document.getElementById('copy').textContent='Copia tutti i commenti'},2000)},fb)}catch(e){fb()}};
 })();
+</script>
+<div id="sw21"></div>
+<script>
+(function(){
+var base=location.pathname.indexOf('/app/')>-1?'../':'';
+var items=[['Home',base+'index.html','index.html'],['App',base+'app/index.html','/app/'],['Pannello',base+'admin_it.html','admin_it'],['Notifiche',base+'tg.html','tg.html']];
+var box=document.getElementById('sw21');
+var css='position:fixed;left:0;top:46%;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
+box.style.cssText=css;
+var open=false;
+function cur(p){return location.pathname.indexOf(p)>-1}
+function render(){
+var h='<button id="sw21b" aria-label="Cambia vista" style="background:#FF6913;color:#1A0B02;border:0;border-radius:0 14px 14px 0;width:34px;height:52px;font-size:18px;cursor:pointer">&#8644;</button>';
+if(open){h+='<div style="position:absolute;left:36px;top:-30px;background:rgba(10,11,14,.97);border:1px solid #5a3418;border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:130px;box-shadow:0 8px 30px rgba(0,0,0,.6)">';
+items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('tg.html')):cur(it[2]);
+h+='<a href="'+it[1]+'" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:'+(a?'#1A0B02':'#F8F9FA')+';background:'+(a?'#FF8A2B':'#1B1E2A')+'">'+it[0]+'</a>';});
+h+='<a href="#" id="sw21r" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:#FF8A2B;background:transparent;border:1px solid #5a3418">&#8635; Ricomincia da capo</a></div>';}
+box.innerHTML=h;document.getElementById('sw21b').onclick=function(){open=!open;render();};var r=document.getElementById('sw21r');if(r){r.onclick=function(e){e.preventDefault();location.href=base+'app/index.html?reset=1&t='+Date.now();};}}
+render();})();
 </script>
 </body>
 </html>

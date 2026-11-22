@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="it"><head><script>(function(){var H="99c5ba7226c882ab3f8367a83347c4f7adb6fa57e22f986c66c89a6660a8f48f",K="g21ok";try{if(localStorage.getItem(K)===H)return}catch(e){}
+document.documentElement.style.visibility="hidden";
+function hex(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+window.addEventListener("DOMContentLoaded",function(){var o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0A0B0E;color:#F8F9FA;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,sans-serif;visibility:visible";
+o.innerHTML='<form style="width:290px;text-align:center"><div style="font-size:22px;font-weight:800;color:#FF6913;margin-bottom:6px">21 giorni</div><div style="color:#9CA3AF;font-size:14px;margin-bottom:16px">Inserisci il codice di accesso</div><input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #2B2E3B;background:#1B1E2A;color:#F8F9FA;font-size:16px"><button style="width:100%;margin-top:12px;padding:12px;border:0;border-radius:12px;background:linear-gradient(120deg,#F5C84C,#A8751B);color:#14110A;font-weight:800;font-size:16px">Entra</button><div id="e" style="color:#EF7070;font-size:13px;margin-top:10px;min-height:16px"></div></form>';
+document.body.appendChild(o);document.documentElement.style.visibility="visible";
+o.querySelector("form").onsubmit=function(ev){ev.preventDefault();var v=o.querySelector("input").value.trim();
+crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(hex(d)===H){try{localStorage.setItem(K,H)}catch(e){}o.remove()}else{o.querySelector("#e").textContent="Codice non corretto"}})}})})();</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>21 giorni: notifiche</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0A0B0E;color:#F8F9FA;font-family:-apple-system,Segoe UI,Roboto,sans-serif}
+.top{padding:14px 16px 6px}h1{font-size:20px;margin:0;color:#FF8A2B}.sub{color:#9CA3AF;font-size:13px;margin-top:4px}
+.back{color:#9CA3AF;font-size:13px;text-decoration:none}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid #2B2E3B;background:#12141C;color:#F8F9FA;border-radius:18px;padding:8px 12px;font-size:13px;cursor:pointer}
+.chip.on{background:linear-gradient(120deg,#FF8A2B,#C2410C);color:#1A0B02;border-color:transparent;font-weight:700}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 40px}
+.tg{background:#0E1621;border:1px solid #2B2E3B;border-radius:18px;overflow:hidden}
+.tgh{background:#17212B;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.av{width:36px;height:36px;border-radius:50%;background:linear-gradient(120deg,#FF8A2B,#C2410C);display:flex;align-items:center;justify-content:center;color:#1A0B02;font-weight:800}
+.tgh b{font-size:15px}.tgh small{display:block;color:#7F91A4;font-size:12px}
+.chat{min-height:300px;max-height:460px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:88%;background:#182533;border-radius:14px 14px 14px 4px;padding:9px 12px;font-size:14px;line-height:1.4;white-space:pre-line;animation:in .35s ease both}
+.m.me{align-self:flex-end;background:#2B5278;border-radius:14px 14px 4px 14px}
+.m .t{display:block;text-align:right;color:#7F91A4;font-size:11px;margin-top:4px}
+.al{color:#FF8A2B;font-weight:700}.red{color:#EF7070;font-weight:700}
+.btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.b{border:0;border-radius:10px;background:#2B3A4A;color:#8EC5FF;padding:8px 12px;font-size:13px;cursor:pointer;flex:1;min-width:110px}
+.b:active{transform:scale(.96)}.b[disabled]{opacity:.45}
+.typing{align-self:flex-start;color:#7F91A4;font-size:13px;padding:2px 8px;animation:pulse 1s infinite}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes pulse{50%{opacity:.4}}
+.eff{margin-top:14px;background:#12141C;border:1px solid #2B2E3B;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.5}
+.eff h3{margin:0 0 6px;font-size:13px;color:#FF8A2B;text-transform:uppercase;letter-spacing:.04em}
+.eff ul{margin:0;padding-left:18px}.eff li{margin:3px 0}
+.play{display:block;width:100%;margin-top:12px;padding:13px;border:0;border-radius:14px;background:linear-gradient(120deg,#FF8A2B,#C2410C);color:#1A0B02;font-weight:800;font-size:16px;cursor:pointer}
+.who{display:inline-block;font-size:11px;border-radius:8px;padding:2px 7px;background:#1B1E2A;color:#9CA3AF;margin-right:6px}
+.chan{display:flex;gap:8px;padding:0 16px 8px;max-width:560px;margin:0 auto}.chan button{flex:1;border:1px solid #2B2E3B;background:#12141C;color:#F8F9FA;border-radius:12px;padding:10px;font-size:14px;cursor:pointer}.chan button.on{background:#FF8A2B;color:#1A0B02;font-weight:800;border-color:transparent}
+.mail{background:#fff;color:#1b1b1f;border-radius:14px;overflow:hidden;animation:in .35s ease both}.mail .h{padding:12px 14px;border-bottom:1px solid #e5e5ea;font-size:13px;color:#555;line-height:1.5}.mail .h b{color:#111;font-size:16px;display:block;margin-bottom:4px}.mail .bd{padding:14px;font-size:14px;line-height:1.55;white-space:pre-line}.mail .cta{display:inline-block;margin-top:10px;background:#1A0B02;color:#FF8A2B;border-radius:10px;padding:10px 14px;font-weight:700;text-decoration:none}
+.lock{background:linear-gradient(160deg,#1c2a3f,#0b0f1a);border-radius:22px;padding:22px 14px;min-height:300px}.lock .clk{text-align:center;font-size:44px;font-weight:300;margin-bottom:14px}.push{background:rgba(255,255,255,.14);backdrop-filter:blur(8px);border-radius:16px;padding:10px 12px;margin-bottom:10px;animation:in .4s ease both}.push small{color:#c9d1dc;font-size:11px;text-transform:uppercase;letter-spacing:.04em}.push b{display:block;font-size:14px;margin:2px 0}.push span{font-size:13px;color:#e8edf3}
+.none{color:#9CA3AF;font-size:14px;padding:18px;text-align:center}
+</style></head><body>
+<div class="top"><a class="back" href="index.html">‹ Indietro</a><h1>Notifiche: Telegram, email, push</h1><div class="sub">Demo con dati di prova. Scegli uno scenario e premi “Avvia”: vedi cosa arriva nel canale e cosa succede nell’app e nel pannello.</div></div>
+<div class="chips" id="chips"></div>
+<div class="chan" id="chan"><button class="on" data-c="tg">Telegram</button><button data-c="em">Email</button><button data-c="pu">Push</button></div>
+<div class="wrap">
+<div id="alt" style="display:none"></div>
+<div class="tg" id="tgbox"><div class="tgh"><div class="av">21</div><div><b id="chname">Canale</b><small id="chsub">bot 21 giorni</small></div></div><div class="chat" id="chat"></div></div>
+<button class="play" id="play">▶ Avvia lo scenario</button>
+<div class="eff" id="eff"></div>
+</div>
+<script>
+var S=[
+{k:'Nuova registrazione',ch:'Canale proprietario',sub:'bot 21 giorni · privato',steps:[
+['bot','<span class="al">🆕 Nuova registrazione</span>\nCliente: Maria R. (ID 10482)\nCodice personal advisor: ROSSI-07\nConsenso dati: ✓\nOra: 09:12'],
+['bot','Il cliente è stato assegnato a <b>Luca Rossi</b>.',['Apri nel pannello','Cambia personal advisor']]],
+eff:['App: il cliente completa onboarding e calcola la norma.','Server: profilo, norma e consenso salvati.','Pannello: Luca Rossi vede Maria tra i suoi clienti.','Nel canale NON vanno peso, dieta o dati di salute (GDPR).']},
+{k:'Scansione barattolo',ch:'Canale personal advisor',sub:'bot 21 giorni',steps:[
+['bot','<span class="al">📦 Scansione registrata</span>\nCliente: Maria R.\nProdotto: Frullato proteico 21 giorni\nPeriodo gratuito aperto fino al 06.12'],
+['bot','Luca, conferma la scansione per il tuo cliente?',['Conferma','Segnala problema']],
+['me','Conferma'],['bot','✓ Scansione confermata. Il cliente vede il periodo attivo.']],
+eff:['App: la scansione è ammessa solo con 3 giorni o meno rimasti.','Un barattolo = un periodo. Duplicato entro 24 h: bloccato.','Pannello personal advisor: riga “confermata”.']},
+{k:'Periodo in scadenza',ch:'Canale personal advisor',sub:'promemoria automatici',steps:[
+['bot','<span class="al">⏰ Periodo in scadenza (3 giorni)</span>\nMaria R.: scade il 06.12\nGiulia T.: scade il 05.12\nPaolo B.: scade il 04.12'],
+['bot','Preparo i promemoria per i clienti?',['Invia a tutti','Scegli clienti']],
+['me','Invia a tutti'],['bot','✓ 3 promemoria inviati (push nell’app).\nProssimo avviso: a 3 giorni.']],
+eff:['Regola: avvisi a 7, 3 e 1 giorno dalla fine.','Il personal advisor approva con un tasto, nulla parte da solo.','Registro invii nel pannello (Promemoria).']},
+{k:'Periodo scaduto',ch:'Canale personal advisor',sub:'promemoria automatici',steps:[
+['bot','<span class="red">⛔ Periodo scaduto, nessuna nuova scansione</span>\nPaolo B. (scaduto ieri)\nMenu, Allenamenti e 21 giorni ora sono bloccati.'],
+['bot','Vuoi contattarlo?',['Scrivi al cliente','Rimanda a domani']]],
+eff:['App: sezioni bloccate, resta il diario.','Una nuova scansione sblocca tutto di nuovo.','Il cliente resta in lista “da recuperare”.']},
+{k:'Scansione sospetta',ch:'Canale proprietario',sub:'bot 21 giorni · privato',steps:[
+['bot','<span class="red">🚩 Scansione sospetta</span>\nLo stesso barattolo su 3 account diversi.\nAccount: 10482, 10511, 10530'],
+['bot','Cosa fare?',['Blocca account','È ok, ignora','Apri verifica']],
+['me','Blocca account'],['bot','✓ Account sospesi. Voce aggiunta nel Registro accessi.']],
+eff:['Pannello: Verifiche → account sospetti.','Ogni azione resta nel registro (chi, quando).']},
+{k:'Senza personal advisor',ch:'Canale proprietario',sub:'bot 21 giorni · privato',steps:[
+['bot','<span class="al">👤 Cliente senza personal advisor</span>\nGiulia T. si è registrata senza codice.'],
+['bot','Assegna a:',['Luca Rossi','Anna Neri','Più tardi']],
+['me','Anna Neri'],['bot','✓ Giulia T. assegnata ad Anna Neri. Anna è stata avvisata.']],
+eff:['Pannello: “Senza personal advisor” → assegnazione.','Anna vede Giulia solo dopo l’assegnazione (isolamento dati).']},
+{k:'Cambio personal advisor',ch:'Canale proprietario',sub:'bot 21 giorni · privato',steps:[
+['bot','<span class="al">🔁 Richiesta di cambio personal advisor</span>\nCliente: Paolo B.\nDa: Luca Rossi → A: Anna Neri\nMotivo: “trasferito”'],
+['bot','Approvi?',['Approva','Rifiuta']],
+['me','Approva'],['bot','✓ Cambio approvato. Luca non vede più Paolo.']],
+eff:['Solo il proprietario può approvare.','Il cambio è nel registro accessi.']},
+{k:'Pagamento',ch:'Canale proprietario',sub:'bot 21 giorni · privato',steps:[
+['bot','<span class="red">💳 Pagamento non riuscito</span>\nCliente: Maria R. · abbonamento mensile\nTentativo 1 di 3.'],
+['bot','Il cliente riceve un avviso nell’app. Nuovo tentativo tra 24 h.',['Vedi cliente']],
+['bot','<span class="al">✓ Pagamento riuscito al 2° tentativo</span>']],
+eff:['Nella versione reale il pagamento passa dagli store (acquisti in app).','Nel demo il pagamento è simulato.']},
+{k:'Spesa IA',ch:'Canale proprietario',sub:'bot 21 giorni · privato',steps:[
+['bot','<span class="al">🤖 Spesa IA all’80% del limite mensile</span>\n€ 40 di € 50 · 1 240 menu generati'],
+['bot','Cosa fare?',['Alza il limite','Passa ai menu di riserva','Ignora']],
+['me','Passa ai menu di riserva'],['bot','✓ I menu ora usano le ricette pronte. Nessun costo IA.']],
+eff:['Pannello: Spesa IA con limite e soglie.','L’app non si ferma: c’è sempre il menu di riserva.']},
+{k:'Supporto e GDPR',ch:'Canale supporto',sub:'bot 21 giorni',steps:[
+['bot','<span class="al"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A0B02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5Z"/></svg> Nuova richiesta di assistenza #214</span>\nMaria R.: “Non riesco a scansionare”'],
+['bot','<span class="red">🗑 Richiesta di cancellazione dati #215</span>\nScadenza legale: 30 giorni (entro il 22.12)'],
+['bot','Azione:',['Prendi in carico','Esporta dati','Cancella dati']],
+['me','Cancella dati'],['bot','✓ Dati cancellati. Conferma inviata al cliente. Registrata nel log.']],
+eff:['Pannello: Account e assistenza con coda GDPR.','L’app ha “Esporta” e “Elimina i miei dati” (lo vedi in Altro).']},
+{k:'Messaggio al advisor',ch:'Canale personal advisor',sub:'bot 21 giorni',steps:[
+['bot','<span class="al"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A0B02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5Z"/></svg> Nuovo messaggio da Maria R.</span>\n“Posso scansionare il barattolo già oggi?”\n(nessun numero di telefono: la chat resta nell’app)'],
+['bot','Rispondi qui, il cliente vede la risposta nell’app.',['Rispondi','Apri la chat nel pannello']],
+['me','Rispondi'],['bot','✓ Risposta inviata a Maria. Lei la vede nell’app.']],
+eff:['App: il cliente scrive dalla sezione “Altro”.','L’advisor risponde dal Telegram o dall’area advisor, senza vedere il numero del cliente.','Nel pannello restano visibili solo data e stato, non il testo, salvo segnalazione.']},
+{k:'Errore del server',ch:'Canale tecnico',sub:'bot 21 giorni',steps:[
+['bot','<span class="red">🔴 Errore: il servizio menu non risponde</span>\n3 richieste fallite negli ultimi 5 minuti.'],
+['bot','L’app usa i menu di riserva. Controllo ogni minuto.'],
+['bot','<span class="al">🟢 Servizio ripristinato</span> dopo 4 minuti.']],
+eff:['Gli alert tecnici vanno in un canale separato.','I clienti non vedono errori: l’app passa alla riserva.']}
+];
+var cur=0,run=0,chips=document.getElementById('chips'),chat=document.getElementById('chat');
+S.forEach(function(s,i){var b=document.createElement('button');b.className='chip';b.textContent=(i+1)+'. '+s.k;b.onclick=function(){pick(i)};chips.appendChild(b)});
+function clock(){var d=new Date();return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+function pick(i){cur=i;run++;[].forEach.call(chips.children,function(c,j){c.className='chip'+(j==i?' on':'')});
+var s=S[i];document.getElementById('chname').textContent=s.ch;document.getElementById('chsub').textContent=s.sub;
+chat.innerHTML='';document.getElementById('eff').innerHTML='<h3>Cosa succede</h3><ul>'+s.eff.map(function(e){return'<li>'+e+'</li>'}).join('')+'</ul>';
+var p=document.getElementById('play');p.textContent='▶ Avvia lo scenario';p.disabled=false}
+function add(kind,html,btns){var m=document.createElement('div');m.className='m'+(kind=='me'?' me':'');m.innerHTML=html+'<span class="t">'+clock()+'</span>';
+if(btns){var w=document.createElement('div');w.className='btns';btns.forEach(function(t){var b=document.createElement('button');b.className='b';b.textContent=t;b.onclick=function(){[].forEach.call(w.children,function(x){x.disabled=true});add('me',t);setTimeout(function(){add('bot','✓ Ricevuto: «'+t+'». Azione registrata nel pannello.')},700)};w.appendChild(b)});m.insertBefore(w,m.querySelector('.t'))}
+chat.appendChild(m);chat.scrollTop=chat.scrollHeight}
+function play(){var my=++run,s=S[cur],i=0;chat.innerHTML='';var p=document.getElementById('play');p.disabled=true;p.textContent='In corso…';
+function next(){if(my!=run)return;if(i>=s.steps.length){p.disabled=false;p.textContent='↺ Rivedi lo scenario';return}
+var st=s.steps[i++];var t=document.createElement('div');t.className='typing';t.textContent=st[0]=='me'?'Tu stai scrivendo…':'bot sta scrivendo…';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+setTimeout(function(){if(my!=run)return;t.remove();add(st[0],st[1],st[2]);setTimeout(next,900)},st[0]=='me'?400:800)}
+next()}
+document.getElementById('play').onclick=play;pick(0);
+var EM=[
+{to:'maria.r@esempio.it',subj:'Benvenuta in 21 giorni, Maria',body:'Ciao Maria,\nil tuo profilo è pronto: fabbisogno 1650 kcal e 126 g di proteine al giorno.\nIl tuo personal advisor è Luca Rossi (ROSSI-07).\n\nQuando mancano 3 giorni o meno, puoi scansionare un nuovo barattolo per riaprire il periodo gratuito.',cta:'Apri l’app'},
+{to:'maria.r@esempio.it',subj:'Periodo gratuito attivo fino al 06.12',body:'Ciao Maria,\nabbiamo registrato la scansione del barattolo “Frullato proteico 21 giorni”.\nMenu, Allenamenti e 21 giorni sono sbloccati fino al 06.12.',cta:'Vai al programma'},
+{to:'maria.r@esempio.it',subj:'Mancano 7 giorni alla fine del periodo',body:'Ciao Maria,\nil tuo periodo gratuito finisce il 06.12.\nPuoi scansionare un nuovo barattolo da adesso: il programma continua senza pause.\nSe hai dubbi, scrivi a Luca Rossi, il tuo personal advisor.',cta:'Scansiona un barattolo'},
+{to:'paolo.b@esempio.it',subj:'Il tuo periodo è terminato',body:'Ciao Paolo,\nil periodo è finito: Menu, Allenamenti e 21 giorni sono bloccati. Il diario resta disponibile.\nCon una nuova scansione si sblocca tutto di nuovo.',cta:'Scansiona ora'},
+{to:'admin@esempio.it',subj:'[21 giorni] Scansione sospetta: 3 account',body:'Lo stesso barattolo è stato scansionato da 3 account diversi (10482, 10511, 10530).\nAzione consigliata: verifica e blocco.',cta:'Apri Verifiche'},
+{to:'admin@esempio.it',subj:'[21 giorni] Cliente senza personal advisor',body:'Giulia T. si è registrata senza codice personal advisor.\nAssegnala dal pannello: fino ad allora nessun personal advisor la vede.',cta:'Assegna'},
+{to:'admin@esempio.it',subj:'[21 giorni] Richiesta di cambio personal advisor',body:'Paolo B. chiede di passare da Luca Rossi ad Anna Neri.\nMotivo: trasferito. Serve la tua approvazione.',cta:'Approva o rifiuta'},
+{to:'maria.r@esempio.it',subj:'Pagamento non riuscito',body:'Ciao Maria,\nnon siamo riusciti ad addebitare l’abbonamento. Riproveremo tra 24 ore.\nPuoi anche aggiornare il metodo di pagamento dalle impostazioni dello store.',cta:'Apri l’app'},
+{to:'admin@esempio.it',subj:'[21 giorni] Spesa IA all’80% del limite',body:'Spesi € 40 su € 50 questo mese (1 240 menu).\nPuoi alzare il limite o passare ai menu di riserva.',cta:'Apri Spesa IA'},
+{to:'maria.r@esempio.it',subj:'I tuoi dati sono stati cancellati',body:'Ciao Maria,\nabbiamo cancellato i tuoi dati come richiesto (richiesta #215).\nNon conserviamo più il tuo profilo, il diario o i tuoi pesi.',cta:''},
+{to:'advisor@esempio.it',subj:'Nuovo messaggio da Maria R.',body:'Maria R. ti ha scritto nell’app:\n“Posso scansionare il barattolo già oggi?”\nRispondi dall’app o da Telegram. Il numero di telefono del cliente non è visibile.',cta:'Apri la chat'},
+{to:'tecnico@esempio.it',subj:'[21 giorni] Servizio menu non risponde',body:'3 richieste fallite negli ultimi 5 minuti.\nL’app usa i menu di riserva. Ripristinato dopo 4 minuti.',cta:''}];
+var PU=[
+[{t:'Benvenuta in 21 giorni',b:'Il tuo profilo è pronto. Inizia dal menu di oggi.'}],
+[{t:'Periodo attivo ✓',b:'Barattolo scansionato: sbloccato fino al 06.12.'}],
+[{t:'Mancano 7 giorni',b:'Scansiona un nuovo barattolo per non fermarti.'},{t:'Mancano 3 giorni',b:'Il programma si ferma il 06.12. Scansiona ora.'},{t:'Ultimo giorno',b:'Domani Menu e Allenamenti si bloccano.'}],
+[{t:'Periodo terminato',b:'Scansiona un barattolo per sbloccare di nuovo tutto.'}],
+null,[{t:'Assegnata ad Anna Neri',b:'Da oggi Anna è il tuo personal advisor.'}],[{t:'Personal advisor cambiato',b:'Ora il tuo riferimento è Anna Neri.'}],
+[{t:'Pagamento non riuscito',b:'Riproveremo tra 24 ore. Controlla il metodo di pagamento.'}],null,
+[{t:'Dati cancellati',b:'La tua richiesta è stata completata.'}],[{t:'Il tuo personal advisor ti ha risposto',b:'Apri la chat nell’app per leggere il messaggio.'}],null];
+var ch='tg';
+document.getElementById('chan').onclick=function(e){var c=e.target.getAttribute&&e.target.getAttribute('data-c');if(!c)return;ch=c;[].forEach.call(this.children,function(b){b.className=b.getAttribute('data-c')==c?'on':''});pick(cur)};
+function alt(){var a=document.getElementById('alt'),tb=document.getElementById('tgbox'),pl=document.getElementById('play');
+if(ch=='tg'){a.style.display='none';tb.style.display='';pl.style.display='';return}
+tb.style.display='none';pl.style.display='none';a.style.display='';
+if(ch=='em'){var e=EM[cur];a.innerHTML='<div class="mail"><div class="h"><b>'+e.subj+'</b>Da: 21 giorni &lt;no-reply@21giorni.example&gt;<br>A: '+e.to+'</div><div class="bd">'+e.body.replace(/\n/g,'\n')+(e.cta?'<br><a class="cta" href="#" onclick="return false">'+e.cta+'</a>':'')+'</div></div>'}
+else{var u=PU[cur];a.innerHTML='<div class="lock"><div class="clk">09:12</div>'+(u?u.map(function(x){return'<div class="push"><small>21 giorni · ora</small><b>'+x.t+'</b><span>'+x.b+'</span></div>'}).join(''):'<div class="none">Nessun push al cliente: questo avviso va solo al team (Telegram e email).</div>')+'</div>'}}
+var _pick=pick;pick=function(i){_pick(i);alt()};pick(cur);
+</script><div id="sw21"></div>
+<script>
+(function(){
+var base=location.pathname.indexOf('/app/')>-1?'../':'';
+var items=[['Home',base+'index.html','index.html'],['App',base+'app/index.html','/app/'],['Pannello',base+'admin_it.html','admin_it'],['Notifiche',base+'tg.html','tg.html']];
+var box=document.getElementById('sw21');
+var css='position:fixed;left:0;top:46%;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
+box.style.cssText=css;
+var open=false;
+function cur(p){return location.pathname.indexOf(p)>-1}
+function render(){
+var h='<button id="sw21b" aria-label="Cambia vista" style="background:#FF6913;color:#1A0B02;border:0;border-radius:0 14px 14px 0;width:34px;height:52px;font-size:18px;cursor:pointer">&#8644;</button>';
+if(open){h+='<div style="position:absolute;left:36px;top:-30px;background:rgba(10,11,14,.97);border:1px solid #5a3418;border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:130px;box-shadow:0 8px 30px rgba(0,0,0,.6)">';
+items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('tg.html')):cur(it[2]);
+h+='<a href="'+it[1]+'" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:'+(a?'#1A0B02':'#F8F9FA')+';background:'+(a?'#FF8A2B':'#1B1E2A')+'">'+it[0]+'</a>';});
+h+='<a href="#" id="sw21r" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:#FF8A2B;background:transparent;border:1px solid #5a3418">&#8635; Ricomincia da capo</a></div>';}
+box.innerHTML=h;document.getElementById('sw21b').onclick=function(){open=!open;render();};var r=document.getElementById('sw21r');if(r){r.onclick=function(e){e.preventDefault();location.href=base+'app/index.html?reset=1&t='+Date.now();};}}
+render();})();
+</script>
+</body></html>
