@@ -178,13 +178,13 @@ q('admf').onsubmit=function(ev){ev.preventDefault();crypto.subtle.digest('SHA-25
 var base=location.pathname.indexOf('/app/')>-1?'../':'';
 var items=[['Home',base+'index.html','index.html'],['App cliente',base+'app/index.html','/app/'],['Sito partner',base+'partner.html','partner'],['Automazioni',base+'tg.html','tg.html']];
 var box=document.getElementById('sw21');
-var css='position:fixed;left:0;top:46%;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
+var css='position:fixed;right:10px;top:10px;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
 box.style.cssText=css;
 var open=false;
 function cur(p){return location.pathname.indexOf(p)>-1}
 function render(){
-var h='<button id="sw21b" aria-label="Cambia vista" style="background:#FF6913;color:#1A0B02;border:0;border-radius:0 14px 14px 0;width:34px;height:52px;font-size:18px;cursor:pointer">&#8644;</button>';
-if(open){h+='<div style="position:absolute;left:36px;top:-30px;background:rgba(10,11,14,.97);border:1px solid #5a3418;border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:130px;box-shadow:0 8px 30px rgba(0,0,0,.6)">';
+var h='<button id="sw21b" aria-label="Cambia vista" style="background:#FF6913;color:#1A0B02;border:0;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5)">&#8644;</button>';
+if(open){h+='<div style="position:absolute;right:0;top:52px;background:rgba(10,11,14,.97);border:1px solid #5a3418;border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:130px;box-shadow:0 8px 30px rgba(0,0,0,.6)">';
 items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('partner')&&!cur('tg.html')):cur(it[2]);
 h+='<a href="'+it[1]+'" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:'+(a?'#1A0B02':'#F8F9FA')+';background:'+(a?'#FF8A2B':'#1B1E2A')+'">'+it[0]+'</a>';});
 h+='<a href="#" id="sw21r" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:#FF8A2B;background:transparent;border:1px solid #5a3418">&#8635; Ricomincia da capo</a></div>';}
