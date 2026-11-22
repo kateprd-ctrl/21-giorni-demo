@@ -37,14 +37,14 @@ crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(d){if(
     <script>try{if(/[?&]reset=1/.test(location.search)){var k=[];for(var i=0;i<localStorage.length;i++){var n=localStorage.key(i);if(n&&n.indexOf('challenge21')===0)k.push(n);}k.forEach(function(n){localStorage.removeItem(n)});history.replaceState(null,'',location.pathname);}}catch(e){}</script><noscript> You need to enable JavaScript to run this app. </noscript>
     <!-- The root element for your Expo app. -->
     <div id="root"></div>
-  <script src="./_expo/static/js/web/index-0cca95ae18a44392ef35e57cb6c58469.js" defer></script>
+  <script src="./_expo/static/js/web/index-b8a6c23510c7ef68c0012d2833e09c80.js" defer></script>
 <a href="../index.html#commenti" title="Lascia un commento" style="position:fixed;right:0;top:55%;width:30px;height:34px;display:flex;align-items:center;justify-content:center;background:#FF6913;color:#1A0B02;text-decoration:none;font-size:15px;border-radius:10px 0 0 10px;z-index:99999;opacity:.9"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A0B02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5Z"/></svg></a>
 </html>
 <div id="sw21"></div>
 <script>
 (function(){
 var base=location.pathname.indexOf('/app/')>-1?'../':'';
-var items=[['Home',base+'index.html','index.html'],['App',base+'app/index.html','/app/'],['Pannello',base+'admin_it.html','admin_it'],['Notifiche',base+'tg.html','tg.html']];
+var items=[['Home',base+'index.html','index.html'],['App cliente',base+'app/index.html','/app/'],['Sito partner',base+'partner.html','partner'],['Notifiche',base+'tg.html','tg.html']];
 var box=document.getElementById('sw21');
 var css='position:fixed;left:0;top:46%;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
 box.style.cssText=css;
@@ -53,7 +53,7 @@ function cur(p){return location.pathname.indexOf(p)>-1}
 function render(){
 var h='<button id="sw21b" aria-label="Cambia vista" style="background:#FF6913;color:#1A0B02;border:0;border-radius:0 14px 14px 0;width:34px;height:52px;font-size:18px;cursor:pointer">&#8644;</button>';
 if(open){h+='<div style="position:absolute;left:36px;top:-30px;background:rgba(10,11,14,.97);border:1px solid #5a3418;border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:130px;box-shadow:0 8px 30px rgba(0,0,0,.6)">';
-items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('tg.html')):cur(it[2]);
+items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('partner')&&!cur('tg.html')):cur(it[2]);
 h+='<a href="'+it[1]+'" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:'+(a?'#1A0B02':'#F8F9FA')+';background:'+(a?'#FF8A2B':'#1B1E2A')+'">'+it[0]+'</a>';});
 h+='<a href="#" id="sw21r" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:#FF8A2B;background:transparent;border:1px solid #5a3418">&#8635; Ricomincia da capo</a></div>';}
 box.innerHTML=h;document.getElementById('sw21b').onclick=function(){open=!open;render();};var r=document.getElementById('sw21r');if(r){r.onclick=function(e){e.preventDefault();location.href=base+'app/index.html?reset=1&t='+Date.now();};}}

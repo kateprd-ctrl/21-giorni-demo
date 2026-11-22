@@ -46,13 +46,13 @@ footer{padding:10px 20px 40px}
 <body>
 <div class="hero"><div class="wrap">
   <h1>«21 giorni»</h1>
-  <p>L’app per il programma di alimentazione e allenamento e il pannello di gestione collegato. È una demo funzionante: puoi toccare tutto e verificare. Tutti i dati sono di prova.</p>
+  <p>L’app per il programma di alimentazione e allenamento e il sito per i personal advisor. È una demo funzionante: puoi toccare tutto e verificare. Tutti i dati sono di prova.</p>
 </div></div>
 <div class="wrap">
   <div class="cards">
-    <div class="card"><h2>App</h2><p>Quella che sarà sul telefono: registrazione, diario, scanner del barattolo, menu con IA, allenamenti, 21 giorni, abbonamento. Nel browser la fotocamera è disattivata: al suo posto c’è un elenco «come se avessi scansionato».</p><a class="btn" href="app/index.html">Apri l’app</a></div>
-    <div class="card"><h2>Pannello di gestione</h2><p>Area del proprietario della piattaforma (personal advisor, verifica delle scansioni, catalogo, impostazioni, registro, spesa IA, metriche, finanza) e area del personal advisor.</p><a class="btn" href="admin_it.html">Apri il pannello</a></div>
-    <div class="card"><h2>Notifiche (Telegram, email, push)</h2><p>Come arrivano gli avvisi nel canale, per email e come push (registrazioni, scansioni, scadenze, sospetti, pagamenti, GDPR, errori) e cosa succede nell’app e nel pannello.</p><a class="btn" href="tg.html">Apri gli scenari</a></div>
+    <div class="card"><h2>1. App per il cliente</h2><p>Quella che sarà sul telefono: registrazione, diario, scanner del barattolo, menu con IA, allenamenti, 21 giorni, abbonamento. Nel browser la fotocamera è disattivata: al suo posto c’è un elenco «come se avessi scansionato».</p><a class="btn" href="app/index.html">Apri l’app</a></div>
+    <div class="card"><h2>2. Sito per il personal advisor</h2><p>La pagina che vede chi vuole offrire 21 giorni ai suoi clienti: presentazione, registrazione, codice promo e area personale per seguire i clienti, con le automazioni.</p><a class="btn" href="partner.html">Apri il sito partner</a></div>
+    <div class="card"><h2>Notifiche (Telegram, email, push)</h2><p>Come arrivano gli avvisi nel canale, per email e come push (registrazioni, scansioni, scadenze, sospetti, pagamenti, GDPR, errori) e cosa succede nell’app e nel sito.</p><a class="btn" href="tg.html">Apri gli scenari</a></div>
   </div>
 
   <section>
@@ -112,11 +112,12 @@ document.getElementById('copy').onclick=function(){
  try{navigator.clipboard.writeText(text).then(function(){document.getElementById('copy').textContent='Copiato ✓';setTimeout(function(){document.getElementById('copy').textContent='Copia tutti i commenti'},2000)},fb)}catch(e){fb()}};
 })();
 </script>
+<div style="text-align:center;padding:18px 0 30px"><a href="admin_it.html" style="color:#8a8f9c;font-size:13px;text-decoration:none;border-bottom:1px solid #3a3f4c">Accesso amministratore</a></div>
 <div id="sw21"></div>
 <script>
 (function(){
 var base=location.pathname.indexOf('/app/')>-1?'../':'';
-var items=[['Home',base+'index.html','index.html'],['App',base+'app/index.html','/app/'],['Pannello',base+'admin_it.html','admin_it'],['Notifiche',base+'tg.html','tg.html']];
+var items=[['Home',base+'index.html','index.html'],['App cliente',base+'app/index.html','/app/'],['Sito partner',base+'partner.html','partner'],['Notifiche',base+'tg.html','tg.html']];
 var box=document.getElementById('sw21');
 var css='position:fixed;left:0;top:46%;z-index:99999;font:600 13px system-ui,-apple-system,sans-serif;';
 box.style.cssText=css;
@@ -125,7 +126,7 @@ function cur(p){return location.pathname.indexOf(p)>-1}
 function render(){
 var h='<button id="sw21b" aria-label="Cambia vista" style="background:#FF6913;color:#1A0B02;border:0;border-radius:0 14px 14px 0;width:34px;height:52px;font-size:18px;cursor:pointer">&#8644;</button>';
 if(open){h+='<div style="position:absolute;left:36px;top:-30px;background:rgba(10,11,14,.97);border:1px solid #5a3418;border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:130px;box-shadow:0 8px 30px rgba(0,0,0,.6)">';
-items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('tg.html')):cur(it[2]);
+items.forEach(function(it){var a=it[0]=='Home'?(!cur('/app/')&&!cur('admin_it')&&!cur('partner')&&!cur('tg.html')):cur(it[2]);
 h+='<a href="'+it[1]+'" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:'+(a?'#1A0B02':'#F8F9FA')+';background:'+(a?'#FF8A2B':'#1B1E2A')+'">'+it[0]+'</a>';});
 h+='<a href="#" id="sw21r" style="text-decoration:none;padding:9px 12px;border-radius:12px;color:#FF8A2B;background:transparent;border:1px solid #5a3418">&#8635; Ricomincia da capo</a></div>';}
 box.innerHTML=h;document.getElementById('sw21b').onclick=function(){open=!open;render();};var r=document.getElementById('sw21r');if(r){r.onclick=function(e){e.preventDefault();location.href=base+'app/index.html?reset=1&t='+Date.now();};}}
